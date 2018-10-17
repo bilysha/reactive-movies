@@ -1,7 +1,6 @@
 .App {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #fff;
   min-height:100%;
   position:relative;
 }
@@ -17,8 +16,14 @@ main {
   justify-content: space-between;
 }
 
+.side-menu, .main-content {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
 .side-menu {
   width: 20%;
+  height: max-content;
 }
 
 .main-content {
@@ -27,7 +32,6 @@ main {
 
 header, footer {
   display: flex;
-  background-color: #282c34;
   color: white;
   padding: 20px;
 }
@@ -46,6 +50,23 @@ footer {
   height: 60px;
   color: #61dafb;
   justify-content: flex-end;
+}
+
+ul {
+  width: 100%;
+  padding-left: 10px
+}
+
+ul li {
+  padding: 5px 0 5px 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+ul li:hover {
+  background-color: #61dafb;
+  color: #222;
 }
 
 @keyframes App-logo-spin {

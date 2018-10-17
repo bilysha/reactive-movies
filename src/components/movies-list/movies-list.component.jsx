@@ -4,6 +4,8 @@ import HttpClient from './../../services/httpClient';
 
 import Movie from './../movie/movie.component';
 
+import './movies-list.component.css';
+
 export default class MoviesList extends React.Component {
     constructor(props) {
         super(props);
@@ -22,7 +24,7 @@ export default class MoviesList extends React.Component {
 
     render() {
         return (
-            <section className='main-content'>
+            <section className='main-content movies-list'>
                 {this.state.movies.length !== 0 ?
                     <ul>
                         {this.state.movies.map((item, index) => <Movie key={index} movie={item}></Movie>)}
