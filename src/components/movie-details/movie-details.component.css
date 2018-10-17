@@ -3,7 +3,71 @@
     color: #fff;
 }
 
+.movie-details ul {
+    display: flex;
+}
+
+.movie-details ul li {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.movie-details_companies ul li {
+    min-height: 100%;
+    vertical-align: top;
+    display: flex;
+    align-items: flex-end;
+}
+
+.movie-details_companies figure {
+    max-width: 100px;
+    vertical-align: bottom;
+}
+
+.movie-details_companies figure img {
+    max-width: 100%;
+}
+
+.movie-details figure figcaption {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.movie-details_title {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.movie-details_title_status {
+    display: inline-block;
+    background-color: green;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    vertical-align: top;
+    letter-spacing: 1px;
+}
+
+.movie-details_title_votes {
+    float: right;
+}
+
 .movie-details_poster {
     width: 100%;
     border-radius: 5px;
+}
+
+.movie-details_tagline {
+    text-align: right;
+    font-style: italic;
+}
+
+.movie-details_tagline::before, .movie-details_tagline::after {
+    content: '\'';
+}
+
+.movie-details_overview {
+    margin: 10px 0;
+    padding: 10px 0;
 }

@@ -18,8 +18,15 @@ export default class MovieDetails extends React.Component {
         };
     }
 
-    adjustPosterPath() {
+    adjustBackdropPath() {
         return `https://image.tmdb.org/t/p/original${this.state.movie.backdrop_path}`;
+    }
+
+    adjustPosterPath(src) {
+        return src ?
+                `https://image.tmdb.org/t/p/w200${src}`
+            :
+                `no_poster_image_avaliable.jpeg`
     }
 
     componentWillMount() {
@@ -37,8 +44,8 @@ export default class MovieDetails extends React.Component {
     getSimilarMovies(movie) {
         this.httpClient.getSimilarMovies(movie.id)
             .then((movies) => {
-                movies.results.length > 5 ?
-                    this.setState({similarMovies: movies.results.splice(0, 5)})
+                movies.results.length > 4 ?
+                    this.setState({similarMovies: movies.results.splice(0, 4)})
                 :
                     this.setState({similarMovies: movies.results})
             })
@@ -64,12 +71,12 @@ export default class MovieDetails extends React.Component {
                                 <Link to={movie.homepage} className='link'>
                                     {movie.title}
                                 </Link>
+                                <span className='movie-details_title_status'>{movie.status}</span>
                                 <span className='movie-details_title_votes'>{movie.vote_average}</span>
                             </h3>
-                            <img className='movie-details_poster' src={this.adjustPosterPath()} alt='movie_poster' />
+                            <img className='movie-details_poster' src={this.adjustBackdropPath()} alt='movie_poster' />
                             <p className='movie-details_tagline'>{movie.tagline}</p>
                             <p className='movie-details_overview'>{movie.overview}</p>
-                            <p className='movie-details_status'>{movie.status}</p>
                             <article className='movie-details_genres'>
                                 <p>Genres : </p>
                                 <ul>
@@ -79,7 +86,16 @@ export default class MovieDetails extends React.Component {
                             <article className='movie-details_companies'>
                                 <p>Companies : </p>
                                 <ul>
-                                    {movie.production_companies.map((company, index) => <li key={index}>{company.name}</li>)}
+                                    {movie.production_companies.map((company, index) => 
+                                        <li key={index}>
+                                            <figure>
+                                                    <img src={this.adjustPosterPath(company.logo_path)} alt='company_logo_poster'/>
+                                                <figcaption>
+                                                    {company.name}
+                                                </figcaption>
+                                            </figure>
+                                        </li>
+                                    )}
                                 </ul>
                             </article>
                             <article className='movie-details_collection'>
@@ -87,7 +103,16 @@ export default class MovieDetails extends React.Component {
                                     <Fragment>
                                         <p>Collection : </p>
                                         <ul>
-                                            {this.state.collection.parts.map((part, index) => <li key={index}>{part.title}</li>)}
+                                            {this.state.collection.parts.map((part, index) =>
+                                                <li key={index}>
+                                                <figure>
+                                                    <img src={this.adjustPosterPath(part.poster_path)} alt='collection_part_poster'/>
+                                                    <figcaption>
+                                                        {part.title}
+                                                    </figcaption>
+                                                </figure>
+                                                </li>
+                                            )}
                                         </ul>
                                     </Fragment>
                                 :
@@ -98,7 +123,16 @@ export default class MovieDetails extends React.Component {
                                 <p>Silimar movies : </p>
                                 {this.state.similarMovies ?
                                         <ul>
-                                            {this.state.similarMovies.map((movie, index) => <li key={index}>{movie.title}</li>)}
+                                            {this.state.similarMovies.map((movie, index) =>
+                                                <li key={index}>
+                                                    <figure>
+                                                        <img src={this.adjustPosterPath(movie.poster_path)} alt='similar_movie_poster'/>
+                                                        <figcaption>
+                                                            {movie.title}
+                                                        </figcaption>
+                                                    </figure>
+                                                </li>
+                                            )}
                                         </ul>
                                     :
                                         <p>Loading similar movies</p>
