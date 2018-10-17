@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import './movie.component.css';
 
 export default class Movie extends React.Component {
@@ -29,9 +31,11 @@ export default class Movie extends React.Component {
             <section className='movie'>
                 <img className='movie_img' src={this.adjustPosterPath()} alt='movie_poster'></img>
                 <article className='movie-body'>
-                    <h3 className='movie-body_title'>
-                        {movie.title}
-                    </h3>
+                    <Link to={`/movie/${this.props.movie.id}`} className='link'>
+                        <h3 className='movie-body_title'>
+                            {movie.title}
+                        </h3>
+                    </Link>
                     <p className='movie-body_overview'>
                         {this.sliceMovieOverview()}
                     </p>

@@ -28,15 +28,15 @@ main {
 
 .main-content {
   width: 78%;
+  background: linear-gradient(180deg, #335f6b, #222);
 }
 
 header, footer {
-  display: flex;
-  color: white;
-  padding: 20px;
+  padding: 20px 0;
 }
 
-header {
+.header_link {
+  display: flex;
   justify-content: space-between;
   font-size: 42px;
   font-weight: bold;
@@ -45,11 +45,13 @@ header {
 
 footer {
   position: absolute;
+  display: flex;
   bottom: 0;
   width: 100%;
   height: 60px;
-  color: #61dafb;
+  color: #222;
   justify-content: flex-end;
+  font-weight: bold;
 }
 
 ul {
@@ -67,6 +69,10 @@ ul li {
 ul li:hover {
   background-color: #61dafb;
   color: #222;
+}
+
+.link {
+  color: #fff;
 }
 
 @keyframes App-logo-spin {
