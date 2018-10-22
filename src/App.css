@@ -1,8 +1,11 @@
 .App {
-  max-width: 1200px;
-  margin: 0 auto;
   min-height:100%;
   position:relative;
+}
+
+.center-content {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -11,28 +14,12 @@
 }
 
 main {
-  padding-bottom: 60px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.side-menu, .main-content {
-  background-color: #fff;
-  border-radius: 5px;
-}
-
-.side-menu {
-  width: 20%;
-  height: max-content;
-}
-
-.main-content {
-  width: 78%;
-  background: linear-gradient(180deg, #335f6b, #222);
+  padding: 20px 0 80px 0;
 }
 
 header, footer {
-  padding: 20px 0;
+  padding: 20px;
+  background-color: #4058B1;
 }
 
 .header_link {
@@ -41,6 +28,10 @@ header, footer {
   font-size: 42px;
   font-weight: bold;
   font-style: italic;
+}
+
+.side-menu {
+  margin-bottom: 20px;
 }
 
 footer {
@@ -67,12 +58,24 @@ ul li {
 }
 
 ul li:hover {
-  background-color: #61dafb;
-  color: #222;
+  background-color: #4058B1;
+  color: #fff;
 }
 
 .link {
   color: #fff;
+}
+
+.colored-link {
+  color: #4058B1;
+}
+
+.dark-link {
+  color: #000;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 h3 {

@@ -1,6 +1,8 @@
 @font-face {
-  font-family: 'Acme Regular';
-  src: url('./../fonts/awesome/Acme-Regular.ttf');
+  font-family: 'Poppins Regular';
+  src: url('./../fonts/Poppins-Regular.ttf');
+  font-weidht: normal;
+  font-style: normal;
 }
 
 /*font awesome*/

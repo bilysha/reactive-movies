@@ -1,33 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import HttpClient from './../../services/httpClient';
+import { fetchMoviesList, fetchMoviesListByGenreId } from './../../store/actions/movies.action';
 
 import Movie from './../movie/movie.component';
 
 import './movies-list.component.css';
 
-export default class MoviesList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.httpClient = new HttpClient();
-
-        this.state = {
-            movies: []
-        };
+class MoviesList extends React.Component {
+    componentWillMount() {
+        this.uploadMoviesList();
     }
 
-    componentWillMount() {
-        this.httpClient.getMoviesList()
-            .then(res => this.setState({movies: res.results}));
-
+    uploadMoviesList() {
+        const urlParams = this.props.match.params;
+        console.log(urlParams);
+        switch(urlParams.filter) {
+            case 'genre':
+                return this.props.onFetchMoviesListByGenreId(urlParams.filter_id);
+            case 'search':
+                console.log(urlParams)
+                return [];
+            default:
+                return this.props.onFetchMoviesList(urlParams.filter);
+        }
     }
 
     render() {
+        const movies = this.props.moviesList;
+        //const genres = this.props.state.genresList;
+
         return (
             <section className='main-content movies-list'>
-                {this.state.movies.length !== 0 ?
-                    <ul>
-                        {this.state.movies.map((item, index) => <Movie key={index} movie={item}></Movie>)}
+                {movies.length ?
+                    <ul className='main-content_movies-list'>
+                        {movies.map((item, index) => <Movie key={index} movie={item}></Movie>)}
                     </ul>
                     :
                     <p>Waiting for movies</p>
@@ -36,3 +43,18 @@ export default class MoviesList extends React.Component {
         )
     }
 }
+
+export default connect(
+    state => ({
+        moviesList: state.moviesList
+    }), //mapped state to props (state from store to props)
+    dispatch => ({
+        onFetchMoviesList: (filter) => {
+            dispatch(fetchMoviesList(filter))
+        },
+
+        onFetchMoviesListByGenreId: (id) => {
+            dispatch(fetchMoviesListByGenreId(id));
+        }
+    })
+)(MoviesList);

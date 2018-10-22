@@ -5,11 +5,9 @@ body,
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-    background: linear-gradient(180deg, #222, #335f6b);
-    background-attachment: fixed;
+  font-family: 'Poppins Regular';
+  background-color: #eee;
+  background-attachment: fixed;
 }
 
 code {

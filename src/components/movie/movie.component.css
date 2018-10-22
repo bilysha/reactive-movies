@@ -1,54 +1,109 @@
 .movie {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+    min-width: 24.7%;
+    max-width: 24.7%;
+    background-color: #fff;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    border-collapse: collapse;
+    position: relative;
+}
+
+.movie_title {
+    padding: 10px 60px 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 90%;
+}
+
+.movie_title:hover {
+    background: linear-gradient(90deg, #4058B1, #fff) ;
+    color: #fff;
+}
+
+.movie i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #eee;
+}
+
+.movie i:hover {
+    color: orangered;
+}
+
+.movie figure {
     display: flex;
-    background: linear-gradient(180deg, #335f6b, #222);
-    border-radius: 5px;
+}
+
+.movie figure figcaption {
+    width: 100%;
+}
+
+.movie_img-wrapper {
+    min-width: 150px;
+    min-height: 225px;
+    max-width: 150px;
+    max-height: 225px;
+    margin-left: 20px;
 }
 
 .movie_img {
-    min-width: 200px;
-    min-height: 300px;
-    max-width: 200px;
-    max-height: 300px;
-    border-radius: 5px 0 0 5px;
+    width: 100%;
+    box-shadow: 0px 0px 1px 2px rgba(0,0,0,0.2);
+    border-collapse: collapse;
 }
 
 .movie-body {
-    position: relative;
-    min-height: 300px;
-    max-height: 300px;
-    color: #fff;
-    border: 1px solid #aaa;
-    border-left: none;
-    border-radius: 0 5px 5px 0;
+    padding-top: 10px;
 }
 
-.movie-body_title {
-    border-bottom: 1px solid #222;
-    padding: 10px 20px 10px 20px;
-    cursor: pointer;
-    border-radius: 0 5px 0 0 ;
+.movie-body_release {
+    padding-left: 10px;
 }
 
-.movie-body_title:hover {
-    background: linear-gradient(45deg, #222, #61dafb);
-    color: #61dafb;
+.movie-body_release span {
+    display: block;
+    margin: 10px 0 0 10px;
+    font-weight: normal;
 }
 
 .movie-body_overview {
-    border-bottom: 1px solid #222;
-    padding: 10px 20px 20px 10px;
+    padding: 20px;
+    text-align: justify;
 }
 
 .movie-body_genres {
-    padding: 10px 20px 10px 20px;
+    padding: 0 10px 10px 10px;
+}
+
+.movie-body_genres ul {
+    padding-left: 0;
 }
 
 .movie-body_vote {
-    border-top: 1px solid #335f6b;
     padding: 10px;
     position: absolute;
     bottom: 0;
     width: 100%;
     text-align: right;
+    /* background: linear-gradient(to right, red 0%,red 75%,green 75%,green 100%);*/
+}
+
+/*zoom movie poster */
+img[tabindex="0"] {
+    cursor: zoom-in;
+}
+
+img[tabindex="0"]:focus {
+    position: fixed;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
 }

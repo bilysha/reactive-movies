@@ -1,6 +1,27 @@
 .movie-details {
     padding: 20px;
-    color: #fff;
+    background-color: #fff;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    border-collapse: collapse;
+    position: relative;
+}
+
+.movie-details article {
+    border-top: 2px solid #ccc;
+    position: relative;
+    padding: 20px;
+}
+
+.movie-details-article_title {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    transform: translate(0, -50%);
+    background-color: #fff;
+    width: 150px;
+    padding: 5px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
 }
 
 .movie-details ul {
@@ -10,27 +31,31 @@
 .movie-details ul li {
     margin-right: 10px;
     padding: 5px;
+    max-width: 20%;
 }
 
-.movie-details_companies ul li {
-    min-height: 100%;
-    vertical-align: top;
-    display: flex;
-    align-items: flex-end;
+.movie-details ul li:hover .dark-link, .movie-details ul li:hover .colored-link {
+    color: #fff;
 }
 
-.movie-details_companies figure {
-    max-width: 100px;
-    vertical-align: bottom;
-}
-
-.movie-details_companies figure img {
-    max-width: 100%;
+.movie-details ul li figure img {
+    display: block;
+    margin: 0 auto;
 }
 
 .movie-details figure figcaption {
     margin-top: 10px;
     text-align: center;
+}
+
+.movie-details_votes {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    width: 200px;
+    font-size: 0;
+    height: 40px;
 }
 
 .movie-details_title {
@@ -41,16 +66,13 @@
 .movie-details_title_status {
     display: inline-block;
     background-color: green;
+    color: #fff;
     font-size: 12px;
     padding: 2px 5px;
     border-radius: 5px;
     margin-left: 10px;
     vertical-align: top;
     letter-spacing: 1px;
-}
-
-.movie-details_title_votes {
-    float: right;
 }
 
 .movie-details_poster {
@@ -68,6 +90,6 @@
 }
 
 .movie-details_overview {
-    margin: 10px 0;
+    margin: 10px 0 20px 0;
     padding: 10px 0;
 }
