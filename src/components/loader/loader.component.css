@@ -1,0 +1,11 @@
+.loader-wrapper {
+    text-align: center;
+}
+
+.loader-wrapper img {
+    max-width: 100px;
+    margin-bottom: 20px;
+    margin: 0 auto;
+    display: block;
+    animation: App-logo-spin infinite 20s linear;
+}

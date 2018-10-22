@@ -106,6 +106,44 @@
 .movie-details_overview {
     margin: 10px 0 20px 0;
     padding: 10px 0;
+    text-align: justify;
+}
+
+.movie-details_video .video-wrapper {
+    width: 100%;
+    display: flex;
+}
+
+.movie-details_video .video-wrapper .iframe-wrapper {
+    width: 50%;
+    background-color: #4085B1;
+    padding: 20px;
+}
+.movie-details_video iframe {
+    width: 100%;
+    height: 300px;
+}
+
+.movie-details_video .video-wrapper ul {
+    width: 50%;
+    flex-direction: column;
+    padding: 0;
+}
+
+.movie-details_video .video-wrapper ul li {
+    min-width: 100%;
+    padding: 20px;
+    margin: 0;
+    border-radius: 0;
+}
+
+.movie-details_video .video-wrapper ul li:hover {
+    background-color: #ccc;
+    color: #222;
+}
+
+.movie-details_video .video-wrapper ul li.active {
+    background-color: #4085B1;
 }
 
 .movie-details_genres ul li, .movie-details_companies ul li {

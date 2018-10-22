@@ -10,6 +10,8 @@ import HttpClient from '../../services/httpClient';
 
 import { userFilters } from './../../constants/user-filters';
 
+import Loader from './../loader/loader.component';
+
 class Navigation extends React.Component {
     constructor(props) {
         super(props);
@@ -59,7 +61,7 @@ class Navigation extends React.Component {
         const genres = this.props.genresList;
 
         return (
-            <section className={`side-menu navigation collapsed-${this.state.collapsed}`}>
+            <section className={`side-menu navigation collapsed-${this.state.collapsed} ${genres.length ? '' : 'loading'}`}>
                 {genres.length > 0 ?
                     <Fragment>
                         <article className='navigation_short-info'>
@@ -118,7 +120,7 @@ class Navigation extends React.Component {
                         </div>
                     </Fragment>
                 :
-                    <p>Waiting for genres</p>
+                    <Loader text='Wait please... Loading information...' />
                 }
             </section>
         )

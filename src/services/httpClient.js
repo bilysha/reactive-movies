@@ -26,11 +26,15 @@ export const HttpClient = {
     },
 
     findMovies: (key) => {
-        return sendRequest(`https://api.themoviedb.org/3/search/movie?query=${key}&page=1&language=en-US&api_key=${apiKey}`)
+        return sendRequest(`https://api.themoviedb.org/3/search/movie?query=${key}&page=1&language=en-US&api_key=${apiKey}`);
     },
 
     getMovieCredits: (movie_id) => {
-        return sendRequest(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${apiKey}`)
+        return sendRequest(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${apiKey}`);
+    },
+
+    getMovieVideos: (movie_id) => {
+        return sendRequest(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${apiKey}&language=en-US`);
     }
 };
 

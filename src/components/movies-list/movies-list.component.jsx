@@ -6,6 +6,7 @@ import { fetchMoviesList, fetchMoviesListByGenreId } from './../../store/actions
 import Movie from './../movie/movie.component';
 
 import './movies-list.component.css';
+import Loader from '../loader/loader.component';
 
 class MoviesList extends React.Component {
     componentWillMount() {
@@ -20,11 +21,12 @@ class MoviesList extends React.Component {
 
     uploadMoviesList(url) {
         const urlParams = url || this.props.match.params;
+
         switch(urlParams.filter) {
             case 'genre':
                 return this.props.onFetchMoviesListByGenreId(urlParams.filter_id);
+                //TODO:
             case 'search':
-                console.log(urlParams)
                 return [];
             default:
                 return this.props.onFetchMoviesList(urlParams.filter);
@@ -40,8 +42,8 @@ class MoviesList extends React.Component {
                     <ul className='main-content_movies-list'>
                         {movies.map((item, index) => <Movie key={index} movie={item}></Movie>)}
                     </ul>
-                    :
-                    <p>Waiting for movies</p>
+                :
+                    <Loader text='Wait please... Loading movies...' />
                 }
             </section>
         )
