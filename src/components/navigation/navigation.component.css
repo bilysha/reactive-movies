@@ -28,10 +28,17 @@
     display: flex;
 }
 
+.navigation-active-filter {
+    font-size: 24px;
+    color: #4058B1;
+    font-weight: bold;
+}
+
 .navigation_short-info {
     justify-content: space-between;
     padding: 20px 60px 20px 20px;
     position: relative;
+    border-bottom: 1px solid #ccc;
 }
 
 .navigation_short-info_collapse_btn {
@@ -71,7 +78,7 @@
 }
 
 .navigation_main-content article:not(:first-child) {
-    border-left: 1px solid #eee;
+    border-left: 1px solid #ccc;
 }
 
 .navigation-genres-list {

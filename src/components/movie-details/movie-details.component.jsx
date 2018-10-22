@@ -1,13 +1,17 @@
 import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
+
 import { Link } from 'react-router-dom';
 
 import './movie-details.component.css';
-import image from './votes_average.gif';
+import votesImage from './votes_average.gif';
+import noPhoto from './no_poster_image_available.jpeg';
 
 import HttpClient from '../../services/httpClient';
-import history from './../../history';
 
-export default class MovieDetails extends React.Component {
+import { switchActiveFilter } from '../../store/actions/common.action';
+
+class MovieDetails extends React.Component {
     constructor(props) {
         super(props);
 
@@ -15,8 +19,10 @@ export default class MovieDetails extends React.Component {
 
         this.state = {
             movie: null,
+            collection: null,
             collectionParts: null,
-            similarMovies: null
+            similarMovies: null,
+            cast: null
         };
     }
 
@@ -28,7 +34,7 @@ export default class MovieDetails extends React.Component {
         return src ?
                 `https://image.tmdb.org/t/p/w200${src}`
             :
-                `no_poster_image_avaliable.jpeg`
+                noPhoto
     }
 
     componentWillMount() {
@@ -36,8 +42,6 @@ export default class MovieDetails extends React.Component {
     }
 
     componentWillReceiveProps(nextProps, prevProps) {
-        console.log('nex-props', nextProps);
-        console.log('prev-props', prevProps);
         if (!prevProps.location && nextProps.location.pathname) {
             console.log('here')
             this.uploadMovie(nextProps.match.params.movieId);
@@ -52,15 +56,18 @@ export default class MovieDetails extends React.Component {
         })
         .then((movie) => {
             this.getCollection(movie);
-            this.getSimilarMovies(movie)
-        });
+            this.getSimilarMovies(movie);
+            this.getCredits(movie);
+        })
+        .then(() => this.props.onSwitchActiveFilter(this.state.movie.title));
     }
 
     getSimilarMovies(movie) {
         this.httpClient.getSimilarMovies(movie.id)
             .then((movies) => {
+                console.log(movies);
                 movies.results.length > 5 ?
-                    this.setState({similarMovies: movies.results.splice(0, 5)})
+                    this.setState({similarMovies: movies.results.slice(0, 5)})
                 :
                     this.setState({similarMovies: movies.results})
             })
@@ -71,11 +78,21 @@ export default class MovieDetails extends React.Component {
             this.httpClient.getCollection(movie.belongs_to_collection.id)
                 .then((collection) => {
                     collection.parts.length > 5 ?
-                    this.setState({collectionParts: collection.parts.splice(0, 5)})
+                    this.setState({collectionParts: collection.parts.slice(0, 5), collection: collection.name})
                 :
-                    this.setState({collectionParts: collection.parts})
+                    this.setState({collectionParts: collection.parts, collection: collection.name})
                 });
         }
+    }
+
+    getCredits(movie) {
+        this.httpClient.getMovieCredits(movie.id)
+        .then((credits) => {
+            credits.cast.length > 10 ?
+            this.setState({cast: credits.cast.slice(0, 10)})
+        :
+            this.setState({cast: credits.cast})
+        });
     }
 
     render() {
@@ -90,13 +107,8 @@ export default class MovieDetails extends React.Component {
                 <section className='movie-details'>
                     {movie ?
                         <Fragment>
-                            <span className='movie-details_votes' ref={(span) => {this.votesContainer = span}}><img src={image} alt='votes_image'></img></span>
-                            <h3 className='movie-details_title'>
-                                <Link to={movie.homepage} className='colored-link bold'>
-                                    {movie.title}
-                                </Link>
-                                <span className='movie-details_title_status'>{movie.status}</span>
-                            </h3>
+                            <span className='movie-details_votes' ref={(span) => {this.votesContainer = span}}><img src={votesImage} alt='votes_image'></img></span>
+                            <span className={`movie-details_title_status status-${movie.status}`}>{movie.status}</span>
                             <img className='movie-details_poster' src={this.adjustBackdropPath()} alt='movie_poster' />
                             <p className='movie-details_tagline'>{movie.tagline}</p>
                             <p className='movie-details_overview'>{movie.overview}</p>
@@ -112,20 +124,45 @@ export default class MovieDetails extends React.Component {
                                     )}
                                 </ul>
                             </article>
+                            <article className='movie-details_cast'>
+                                <p className="movie-details-article_title">Cast</p>
+                                {this.state.cast ?
+                                    <ul>
+                                        {this.state.cast.map((cast, index) =>
+                                            <li key={index}>
+                                                <figure>
+                                                    <img src={this.adjustPosterPath(cast.profile_path)} alt='cast_photo' />
+                                                    <span>{cast.character}</span>
+                                                    <figcaption>
+                                                        {cast.name}
+                                                    </figcaption>
+                                                </figure>
+                                            </li>
+                                        )}
+                                    </ul>
+                                :
+                                    <p className='movie-details_no-data'>We do not found any information about casts</p>
+                                }
+                            </article>
                             <article className='movie-details_companies'>
                                 <p className='movie-details-article_title'>Companies</p>
-                                <ul>
-                                    {movie.production_companies.map((company, index) => 
-                                        <li key={index}>
-                                            {company.name}
-                                        </li>
-                                    )}
-                                </ul>
+                                {movie.production_companies.length ?
+                                    <ul>
+                                        {movie.production_companies.map((company, index) => 
+                                            <li key={index}>
+                                                {company.name}
+                                            </li>
+                                        )}
+                                    </ul>
+                                :
+                                    <p className='movie-details_no-data'>We do not nothing about production companies</p>
+                                }
                             </article>
                             <article className='movie-details_collection'>
                                 <p className='movie-details-article_title'>Collection</p>
                                 {this.state.collectionParts ?
                                     <Fragment>
+                                        <p className='movie-details_no-data'>{this.state.collection}</p>
                                         <ul>
                                             {this.state.collectionParts.map((part, index) =>
                                                 <li key={index}>
@@ -142,11 +179,11 @@ export default class MovieDetails extends React.Component {
                                         </ul>
                                     </Fragment>
                                 :
-                                    <p>No collection found for this film</p>
+                                    <p className='movie-details_no-data'>No collection found for this film</p>
                                 }
                             </article>
                             <article className='movie-details_similar'>
-                                <p className='movie-details-article_title'>Silimar movies</p>
+                                <p className='movie-details-article_title'>Recomendations</p>
                                 {this.state.similarMovies ?
                                     <ul>
                                         {this.state.similarMovies.map((movie, index) =>
@@ -173,3 +210,12 @@ export default class MovieDetails extends React.Component {
         )
     }
 }
+
+export default connect(
+    state => ({}), //mapped state to props (state from store to props)
+    dispatch => ({
+        onSwitchActiveFilter: (filter) => {
+            dispatch(switchActiveFilter(filter));
+        }
+    })
+)(MovieDetails);

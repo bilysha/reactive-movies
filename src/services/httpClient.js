@@ -18,7 +18,7 @@ export const HttpClient = {
     },
 
     getSimilarMovies: (movie_id) => {
-        return sendRequest(`https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${apiKey}&language=en-US&page=1`);
+        return sendRequest(`https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=${apiKey}&language=en-US&page=1`);
     },
 
     getMoviesByGenre: (genre_id) => {
@@ -27,6 +27,10 @@ export const HttpClient = {
 
     findMovies: (key) => {
         return sendRequest(`https://api.themoviedb.org/3/search/movie?query=${key}&page=1&language=en-US&api_key=${apiKey}`)
+    },
+
+    getMovieCredits: (movie_id) => {
+        return sendRequest(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${apiKey}`)
     }
 };
 

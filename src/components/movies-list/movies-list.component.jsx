@@ -12,9 +12,14 @@ class MoviesList extends React.Component {
         this.uploadMoviesList();
     }
 
-    uploadMoviesList() {
-        const urlParams = this.props.match.params;
-        console.log(urlParams);
+    componentWillReceiveProps(nextProps, prevProps) {
+        if (!prevProps.location && nextProps.location.pathname !== this.props.location.pathname) {
+            this.uploadMoviesList(nextProps.match.params);
+        }
+    }
+
+    uploadMoviesList(url) {
+        const urlParams = url || this.props.match.params;
         switch(urlParams.filter) {
             case 'genre':
                 return this.props.onFetchMoviesListByGenreId(urlParams.filter_id);
@@ -28,7 +33,6 @@ class MoviesList extends React.Component {
 
     render() {
         const movies = this.props.moviesList;
-        //const genres = this.props.state.genresList;
 
         return (
             <section className='main-content movies-list'>

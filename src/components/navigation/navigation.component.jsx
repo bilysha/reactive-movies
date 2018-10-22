@@ -63,7 +63,7 @@ class Navigation extends React.Component {
                 {genres.length > 0 ?
                     <Fragment>
                         <article className='navigation_short-info'>
-                            <p>Active filter</p>
+                            <p className='navigation-active-filter'>{ this.props.activeFilter }</p>
                             <form className='navigation_search' onSubmit={(e) => this.onSubmitSearchForm(e)}>
                                 <input type="text" name="name" ref={(input) => this.searchIput = input} onChange={this.handleSearchInputChange}/>
                                 <input type="submit" value="Search" onClick={this.onSubmitSearchForm}/>
@@ -127,7 +127,8 @@ class Navigation extends React.Component {
 
 export default connect(
     state => ({
-        genresList: state.genresList
+        genresList: state.genresList,
+        activeFilter: state.common
     }), //mapped state to props (state from store to props)
     dispatch => ({
         onFetchGenresList: () => {

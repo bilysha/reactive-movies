@@ -25,11 +25,11 @@ class Movie extends React.Component {
         return this.props.movie.genre_ids;
     }
 
-    componentWillMount() {
-        const genres = this.props.movie.genre_ids.reduce((acc, id) => {
+    transformMovieGenres(props) {
+        const genres = props.movie.genre_ids.reduce((acc, id) => {
             let name;
 
-            this.props.genresList.map(genre =>
+            props.genresList.map(genre =>
                 name = name ?
                     name
                 : id === genre.id ?
@@ -46,7 +46,15 @@ class Movie extends React.Component {
             return acc;
         },[]);
 
-        this.props.movie.genre_ids = genres;
+        props.movie.genre_ids = genres;
+    }
+
+    componentWillMount() {
+        this.transformMovieGenres(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.transformMovieGenres(nextProps);
     }
 
     render() {
@@ -71,7 +79,13 @@ class Movie extends React.Component {
                             <article className='movie-body_genres'>
                                 <p className='bold'>Genre :</p>
                                 <ul>
-                                    {this.spliceMovieGenres().map((genre, index) => <li key={index}>{genre.name}</li>)}
+                                    {this.spliceMovieGenres().map((genre, index) => 
+                                        <li key={index}>
+                                            <Link to={`/genre/${genre.id}/page/1`} className='dark-link'>
+                                                {genre.name}
+                                            </Link>
+                                        </li>
+                                    )}
                                 </ul>
                             </article>
                             <p className='movie-body_release bold'>
