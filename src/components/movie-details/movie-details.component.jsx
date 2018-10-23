@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './movie-details.component.css';
-import votesImage from './votes_average.gif';
-import noPhoto from './no_poster_image_available.jpeg';
+
 import Loader from './../loader/loader.component';
 
 import HttpClient from '../../services/httpClient';
@@ -29,19 +28,14 @@ class MovieDetails extends React.Component {
         };
     }
 
-    adjustBackdropPath() {
-        return `https://image.tmdb.org/t/p/original${this.state.movie.backdrop_path}`;
-    }
-
-    adjustPosterPath(src) {
-        return src ?
-                `https://image.tmdb.org/t/p/w200${src}`
-            :
-                noPhoto
-    }
-
     componentWillMount() {
         this.uploadMovie(this.props.match.params.movieId);
+    }
+
+    componentDidUpdate() {
+        if (this.votesContainer) {
+            this.votesContainer.style = `background: linear-gradient(to right, orangered 0%, orangered ${this.state.movie.vote_average * 10}%, ${this.state.movie.vote_average * 10}%, #fff 100%);`;
+        }
     }
 
     componentWillReceiveProps(nextProps, prevProps) {
@@ -62,12 +56,12 @@ class MovieDetails extends React.Component {
                 .then((movieData) => {
                      this.setState({
                         movie: movie,
-                        collection: movieData[1].name,
+                        collection: movieData[0].name,
                         collectionParts: this.sliceArray(movieData[0].parts, 5),
                         cast: this.sliceArray(movieData[1].cast, 10),
                         similarMovies: this.sliceArray(movieData[2].results, 5),
-                        movieVideos: movieData[3].results,
-                        activeVideo: movieData[3].results[0]
+                        movieVideos: movieData[3].results ? movieData[3].results : [],
+                        activeVideo: movieData[3].results ? movieData[3].results[0] : {}
                     });
                     this.props.onSwitchActiveFilter(movie.title);
                 });
@@ -81,26 +75,29 @@ class MovieDetails extends React.Component {
             array;
     }
 
-    render() {
-        const movie = this.state.movie;
+    redirect(movie_id) {
+        this.setState({movie: null});
+        this.props.history.push(`/movie/${movie_id}`);
+    }
 
-        if (this.votesContainer) {
-            this.votesContainer.style = `background: linear-gradient(to right, #4058B1 0%, #4058B1 ${movie.vote_average * 10}%, ${movie.vote_average * 10}%, #fff 100%);`;
-        }
+    render() {
+        const { movie } = this.state;
 
         return (
             <section className='main-content'>
                 <section className='movie-details'>
                     {movie ?
                         <Fragment>
-                            <span className='movie-details_votes' ref={(span) => {this.votesContainer = span}}><img src={votesImage} alt='votes_image'></img></span>
+                            <span className='movie-details_votes' ref={(span) => {this.votesContainer = span}}>
+                                <img src={this.props.votesStars} alt='votes_image' />
+                            </span>
                             <span className={`movie-details_title_status status-${movie.status}`}>{movie.status}</span>
-                            <img className='movie-details_poster' src={this.adjustBackdropPath()} alt='movie_poster' />
+                            <img className='movie-details_poster' src={this.props.adjustBackdropPath(movie.backdrop_path)} alt='movie_poster' />
                             <p className='movie-details_tagline'>{movie.tagline}</p>
                             <p className='movie-details_overview'>{movie.overview}</p>
                             <article className='movie-details_video'>
                                 <p className='movie-details-article_title'>Video</p>
-                                {this.state.movieVideos ?
+                                {this.state.movieVideos.length ?
                                     <div className='video-wrapper'>
                                         <div className='iframe-wrapper'>
                                             <iframe src={`https://www.youtube.com/embed/${this.state.activeVideo.key}`} allowFullScreen title='movie video'></iframe>
@@ -131,12 +128,12 @@ class MovieDetails extends React.Component {
                             </article>
                             <article className='movie-details_cast'>
                                 <p className="movie-details-article_title">Cast</p>
-                                {this.state.cast ?
+                                {this.state.cast.length ?
                                     <ul>
                                         {this.state.cast.map((cast, index) =>
                                             <li key={index}>
                                                 <figure>
-                                                    <img src={this.adjustPosterPath(cast.profile_path)} alt='cast_photo' />
+                                                    <img src={this.props.adjustPosterPath(cast.profile_path)} alt='cast_photo' />
                                                     <span>{cast.character}</span>
                                                     <figcaption>
                                                         {cast.name}
@@ -170,9 +167,9 @@ class MovieDetails extends React.Component {
                                         <p className='movie-details_no-data'>{this.state.collection}</p>
                                         <ul>
                                             {this.state.collectionParts.map((part, index) =>
-                                                <li key={index} onClick={() => this.props.history.push(`/movie/${part.id}`)}>
+                                                <li key={index} onClick={() => this.redirect(part.id)}>
                                                     <figure>
-                                                        <img src={this.adjustPosterPath(part.poster_path)} alt='collection_part_poster'/>
+                                                        <img src={this.props.adjustPosterPath(part.poster_path)} alt='collection_part_poster'/>
                                                         <figcaption>
                                                             {part.title}
                                                         </figcaption>
@@ -190,9 +187,9 @@ class MovieDetails extends React.Component {
                                 {this.state.similarMovies.length ?
                                     <ul>
                                         {this.state.similarMovies.map((movie, index) =>
-                                            <li key={index} onClick={() => this.props.history.push(`/movie/${movie.id}`)}>
+                                            <li key={index} onClick={() => this.redirect(movie.id)}>
                                                 <figure>
-                                                    <img src={this.adjustPosterPath(movie.poster_path)} alt='similar_movie_poster'/>
+                                                    <img src={this.props.adjustPosterPath(movie.poster_path)} alt='similar_movie_poster'/>
                                                     <figcaption>
                                                         {movie.title}
                                                     </figcaption>

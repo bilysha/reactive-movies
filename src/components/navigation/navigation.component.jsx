@@ -22,11 +22,6 @@ class Navigation extends React.Component {
         };
 
         this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
-        this.onSubmitSearchForm = this.onSubmitSearchForm.bind(this);
-    }
-
-    adjustPosterPath(path) {
-        return `https://image.tmdb.org/t/p/w200${path}`;
     }
 
     componentWillMount() {
@@ -50,25 +45,28 @@ class Navigation extends React.Component {
         }
     }
 
-    onSubmitSearchForm(e) {
-        e.preventDefault();
-        if (this.searchIput.value.length > 2) {
-            //this.props.onFetchMoviesByKey(this.searchIput.value.length);
-        }
-    }
-
     render() {
         const genres = this.props.genresList;
 
         return (
             <section className={`side-menu navigation collapsed-${this.state.collapsed} ${genres.length ? '' : 'loading'}`}>
-                {genres.length > 0 ?
+                {genres.length ?
                     <Fragment>
                         <article className='navigation_short-info'>
                             <p className='navigation-active-filter'>{ this.props.activeFilter }</p>
-                            <form className='navigation_search' onSubmit={(e) => this.onSubmitSearchForm(e)}>
-                                <input type="text" name="name" ref={(input) => this.searchIput = input} onChange={this.handleSearchInputChange}/>
-                                <input type="submit" value="Search" onClick={this.onSubmitSearchForm}/>
+                            <form className='navigation_search' onSubmit={(e) => e.preventDefault()}>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    ref={(input) => this.searchIput = input}
+                                    onChange={this.handleSearchInputChange}
+                                    className={`${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}
+                                />
+                                <Link
+                                    to={`/search/${this.searchIput ? this.searchIput.value : ''}/page/1`}
+                                    className={`link navigation_search_btn ${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}>
+                                        Search
+                                </Link>
                             </form>
                             <span className='navigation_short-info_collapse_btn' onClick={() => this.setState({collapsed: !this.state.collapsed})}>
                                 <i className="fa fa-chevron-down"></i>
@@ -103,7 +101,7 @@ class Navigation extends React.Component {
                                         {this.state.searchResults.map((movie, index) => 
                                             <li key={index}>
                                                 <figure>
-                                                    <img src={this.adjustPosterPath(movie.poster_path)} alt='movie_poster' />
+                                                    <img src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' />
                                                     <figcaption>
                                                         <Link to={`/movie/${movie.id}`} className='dark-link'>
                                                             {movie.title}

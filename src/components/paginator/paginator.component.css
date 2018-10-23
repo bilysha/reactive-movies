@@ -1,0 +1,40 @@
+.paginator {
+    background-color: #fff;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    border-collapse: collapse;
+    width: 100%;
+    padding: 20px;
+}
+
+.paginator ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.paginator ul li {
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 0;
+}
+
+.paginator ul li.active {
+    background-color: #4085B1;
+    color: #fff;
+}
+
+.paginator ul li.dotted_li.none {
+    display: none;
+}
+
+.paginator ul li.dotted_li {
+    padding: 10px 0 0 0;
+    margin: 0;
+}
+
+.paginator ul li.dotted_li:hover {
+    cursor: default;
+    background-color: #fff;
+    color: #222;
+}

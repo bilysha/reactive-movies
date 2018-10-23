@@ -8,7 +8,7 @@ import history from './history';
 
 import './styles/reset.css';
 import './styles/fonts.css';
-import './index.css';
+import './styles/index.css';
 
 import App from './App';
 

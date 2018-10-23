@@ -18,7 +18,7 @@
 }
 
 .movie_title:hover {
-    background: linear-gradient(90deg, #4058B1, #fff) ;
+    background: linear-gradient(90deg, #4085B1, #fff) ;
     color: #fff;
 }
 
@@ -85,12 +85,20 @@
 }
 
 .movie-body_vote {
-    padding: 10px;
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 20px;
     text-align: right;
-    /* background: linear-gradient(to right, red 0%,red 75%,green 75%,green 100%);*/
+}
+
+.movie-body_vote img {
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
 }
 
 /*zoom movie poster */

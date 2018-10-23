@@ -6,23 +6,22 @@ import { Link } from 'react-router-dom';
 import './movie.component.css';
 
 class Movie extends React.Component {
-    adjustPosterPath() {
-        return `https://image.tmdb.org/t/p/w500${this.props.movie.poster_path}`;
-    }
-
     sliceMovieOverview() {
-        return this.props.movie.overview.length > 100 ?
-            `${this.props.movie.overview.slice(0, 97)}...`
-            :
-            this.props.movie.overview;
+        const { overview } = this.props.movie;
+
+        return overview.length > 100 ?
+            `${overview.slice(0, 97)}...`
+        :
+            overview;
     }
 
     spliceMovieGenres() {
-        if (this.props.movie.genre_ids.length > 4) {
-            this.props.movie.genre_ids.splice(3, this.props.movie.genre_ids.length - 3);
-        }
+        const { genre_ids } = this.props.movie;
 
-        return this.props.movie.genre_ids;
+        return genre_ids.length > 4 ?
+            genre_ids.splice(3, genre_ids.length - 3 )
+        :
+            genre_ids;
     }
 
     transformMovieGenres(props) {
@@ -57,8 +56,12 @@ class Movie extends React.Component {
         this.transformMovieGenres(nextProps);
     }
 
+    componentDidMount() {
+        this.props.setVotes(this.votesContainer, this.props.movie.vote_average);
+    }
+
     render() {
-        const movie = this.props.movie;
+        const { movie } = this.props;
 
         return (
             <section className='movie'>
@@ -73,7 +76,7 @@ class Movie extends React.Component {
                 <article className='movie-body'>
                     <figure>
                         <div className='movie_img-wrapper'>
-                            <img className='movie_img' src={this.adjustPosterPath()} alt='movie_poster' tabIndex='0' />
+                            <img className='movie_img' src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' tabIndex='0' />
                         </div>
                         <figcaption>
                             <article className='movie-body_genres'>
@@ -97,8 +100,8 @@ class Movie extends React.Component {
                     <p className='movie-body_overview'>
                         {this.sliceMovieOverview()}
                     </p>
-                    <p className='movie-body_vote'>
-                        {movie.vote_average}
+                    <p className='movie-body_vote' ref={(p) => this.votesContainer = p}>
+                        <img src={this.props.votesStars} alt='votes_image' />
                     </p>
                     </article>
             </section>

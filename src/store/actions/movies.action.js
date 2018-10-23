@@ -1,16 +1,20 @@
 import HttpClient from './../../services/httpClient';
 
-export const fetchMoviesList = (filter) => dispatch => {
-    HttpClient.getMoviesList(filter)
+export const fetchMoviesList = (filter, page) => dispatch => {
+    return HttpClient.getMoviesList(filter, page)
+        .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res}));
+};
+
+export const clearMoviesList = () => dispatch => {
+    dispatch({type: 'CLEAR_MOVIES_LIST'});
+};
+
+export const fetchMoviesListByGenreId = (id, page) => dispatch => {
+    return HttpClient.getMoviesByGenre(id, page)
         .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res.results}));
 };
 
-export const fetchMoviesListByGenreId = (id) => dispatch => {
-    HttpClient.getMoviesByGenre(id)
-        .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res.results}));
-};
-
-export const fetchMoviesByKey = (key) => dispatch => {
-    HttpClient.findMovies(key)
+export const fetchMoviesByKey = (key, page) => dispatch => {
+    return HttpClient.findMovies(key, page)
         .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res.results}));
 }

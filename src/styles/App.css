@@ -19,7 +19,7 @@ main {
 
 header, footer {
   padding: 20px;
-  background-color: #4058B1;
+  background-color: #4085B1;
 }
 
 .header_link {
@@ -58,7 +58,7 @@ ul li {
 }
 
 ul li:hover {
-  background-color: #4058B1;
+  background-color: #4085B1;
   color: #fff;
 }
 
@@ -67,11 +67,15 @@ ul li:hover {
 }
 
 .colored-link {
-  color: #4058B1;
+  color: #4085B1;
 }
 
 .dark-link {
   color: #000;
+}
+
+ul li:hover .link, ul li:hover .dark-link, ul li:hover .colored-link {
+  color: #fff;
 }
 
 .bold {
