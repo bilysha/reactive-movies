@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './navigation.component.css';
-import { fetchGenresList } from '../../store/actions/gerens.action';
-import { fetchMoviesByKey } from './../../store/actions/movies.action';
+import { fetchGenresList } from '../../../store/actions/gerens.action';
+import { fetchMoviesByKey } from './../../../store/actions/movies.action';
 
-import HttpClient from '../../services/httpClient';
+import HttpClient from '../../../services/movies.httpClient';
 
-import { userFilters } from './../../constants/user-filters';
+import { userFilters } from './../../../constants/user-filters';
 
-import Loader from './../loader/loader.component';
+import Loader from './../../loader/loader.component';
 
 class Navigation extends React.Component {
     constructor(props) {
@@ -63,7 +63,7 @@ class Navigation extends React.Component {
                                     className={`${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}
                                 />
                                 <Link
-                                    to={`/search/${this.searchIput ? this.searchIput.value : ''}/page/1`}
+                                    to={`/home/search/${this.searchIput ? this.searchIput.value : ''}/page/1`}
                                     className={`link navigation_search_btn ${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}>
                                         Search
                                 </Link>
@@ -77,7 +77,7 @@ class Navigation extends React.Component {
                                 <ul>
                                     {genres.map((genre, index) => 
                                         <li key={index}>
-                                            <Link to={`/genre/${genre.id}/page/1`} className='dark-link'>
+                                            <Link to={`/home/genre/${genre.id}/page/1`} className='dark-link'>
                                                 {genre.name}
                                             </Link>
                                         </li>
@@ -88,7 +88,7 @@ class Navigation extends React.Component {
                                 <ul>
                                     {userFilters.map((filter, index) => 
                                         <li key={index}>
-                                            <Link to={`/${filter.linkName}/-1/page/1`} className='dark-link'>
+                                            <Link to={`/home/${filter.linkName}/-1/page/1`} className='dark-link'>
                                                 {filter.name}
                                             </Link>
                                         </li>
@@ -103,7 +103,7 @@ class Navigation extends React.Component {
                                                 <figure>
                                                     <img src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' />
                                                     <figcaption>
-                                                        <Link to={`/movie/${movie.id}`} className='dark-link'>
+                                                        <Link to={`/home/movie/${movie.id}`} className='dark-link'>
                                                             {movie.title}
                                                         </Link>
                                                     </figcaption>

@@ -1,0 +1,141 @@
+.login-page section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+}
+
+.login-page_login {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-page_login article {
+    width: 50%;
+    padding: 50px;
+}
+
+.login-page_login h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.login-page_login p {
+    color: #444;
+    font-size: 20px;
+    text-align: justify;
+}
+
+.login-page article.login-page_login_form-container {
+    width: 40%;
+    margin-right: 100px;
+    align-self: flex-start;
+}
+
+.login-page_login_form-container * {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.login-page_login form {
+    background-color: #4085B1;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 40px;
+    width: 100%;
+}
+
+.login-page_login form .password_hint {
+    font-size: 12px;
+    margin-top: -15px;
+    font-style: italic;
+    text-align: justify;
+}
+
+.login-page_login form input {
+    padding: 10px;
+    border: none;
+}
+
+.login-page_login form input[type='submit'] {
+    cursor: pointer;
+    font-weight: bold;
+    background-color: rgb(116, 195, 245);
+    color: #fff;
+}
+
+.login-page_login form input[type='submit']:hover {
+    background-color: rgb(96, 189, 247);
+}
+
+.login-page_no-accaunt h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.login-page_no-accaunt p {
+    text-align: center;
+}
+
+.login-page_no-accaunt .sign-up, .go-to-site-container .go-to-site_btn {
+    display: block;
+    margin: 0 auto;
+    background-color: rgb(116, 195, 245);
+    padding: 10px 20px;
+    width: max-content;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.login-page_no-accaunt .sign-up:hover, .go-to-site-container .go-to-site_btn:hover {
+    background-color: rgb(96, 189, 247);
+}
+
+.login-page_benefits-container {
+    display: flex;
+}
+
+.login-page_benefits-container article {
+    width: 50%;
+    margin: 50px;
+}
+
+.login-page_benefits-container .benefits-list {
+    background-color: #4085B1;
+    border-radius: 5px;
+}
+
+.login-page_benefits-container .benefits-list p {
+    background-color: rgb(72, 149, 197);
+    padding: 20px;
+    font-size: 20px;
+    text-align: right;
+    border-radius: 5px 5px 0 0;
+}
+
+.login-page_benefits-container .benefits-list ul {
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.login-page_benefits-container .benefits-list ul li {
+    border-bottom: 1px solid rgb(72, 149, 197);
+    padding: 10px;
+    margin: 0;
+    border-radius: 0;
+    cursor: default;
+}
+
+.login-page_benefits-container .benefits-list ul li:hover {
+    background-color: transparent;
+}
+
+.go-to-site-container p {
+    font-size: 24px;
+}

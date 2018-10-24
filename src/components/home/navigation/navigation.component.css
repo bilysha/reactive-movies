@@ -4,6 +4,7 @@
     border-collapse: collapse;
     transition: all 1s;
     overflow: hidden;
+    margin-bottom: 5px;
 }
 
 .loading {

@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchMoviesList, fetchMoviesListByGenreId, clearMoviesList, fetchMoviesByKey } from './../../store/actions/movies.action';
-import { switchActiveFilter } from './../../store/actions/common.action';
+import { fetchMoviesList, fetchMoviesListByGenreId, clearMoviesList, fetchMoviesByKey } from './../../../store/actions/movies.action';
+import { switchActiveFilter } from './../../../store/actions/common.action';
 
-import { userFilters } from './../../constants/user-filters';
+import { userFilters } from './../../../constants/user-filters';
 
 import Movie from './../movie/movie.component';
-import Loader from '../loader/loader.component';
+import Loader from './../../loader/loader.component';
 
-import Paginator from './../paginator/paginator.component';
+import Paginator from './../../paginator/paginator.component';
 
 import './movies-list.component.css';
 
@@ -61,7 +61,7 @@ class MoviesList extends React.Component {
     switchToPage(page) {
         const { params } = this.props.match;
 
-        this.props.history.push(`/${params.filter}/${params.filter_id}/page/${page}`);
+        this.props.history.push(`/home/${params.filter}/${params.filter_id}/page/${page}`);
     }
 
     render() {

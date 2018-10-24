@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 import './movie-details.component.css';
 
-import Loader from './../loader/loader.component';
+import Loader from './../../loader/loader.component';
 
-import HttpClient from '../../services/httpClient';
+import HttpClient from '../../../services/movies.httpClient';
 
-import { switchActiveFilter } from '../../store/actions/common.action';
+import { switchActiveFilter } from './../../../store/actions/common.action';
 
 class MovieDetails extends React.Component {
     constructor(props) {
@@ -77,7 +77,7 @@ class MovieDetails extends React.Component {
 
     redirect(movie_id) {
         this.setState({movie: null});
-        this.props.history.push(`/movie/${movie_id}`);
+        this.props.history.push(`/home/movie/${movie_id}`);
     }
 
     render() {
@@ -119,7 +119,7 @@ class MovieDetails extends React.Component {
                                 <ul>
                                     {movie.genres.map((genre, index) => 
                                         <li key={index}>
-                                            <Link to={`/genre/${genre.id}/page/1`} className='dark-link'>
+                                            <Link to={`/home/genre/${genre.id}/page/1`} className='dark-link'>
                                                 {genre.name}
                                             </Link>
                                         </li>

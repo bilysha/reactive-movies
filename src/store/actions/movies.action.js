@@ -1,4 +1,4 @@
-import HttpClient from './../../services/httpClient';
+import HttpClient from '../../services/movies.httpClient';
 
 export const fetchMoviesList = (filter, page) => dispatch => {
     return HttpClient.getMoviesList(filter, page)

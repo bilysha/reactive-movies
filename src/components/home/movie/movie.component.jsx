@@ -66,7 +66,7 @@ class Movie extends React.Component {
         return (
             <section className='movie'>
                 <div className='movie-header'>
-                    <Link to={`/movie/${this.props.movie.id}`} className='colored-link'>
+                    <Link to={`/home/movie/${this.props.movie.id}`} className='colored-link'>
                         <h3 className='movie_title'>
                             {movie.title}
                         </h3>
@@ -84,7 +84,7 @@ class Movie extends React.Component {
                                 <ul>
                                     {this.spliceMovieGenres().map((genre, index) => 
                                         <li key={index}>
-                                            <Link to={`/genre/${genre.id}/page/1`} className='dark-link'>
+                                            <Link to={`/home/genre/${genre.id}/page/1`} className='dark-link'>
                                                 {genre.name}
                                             </Link>
                                         </li>

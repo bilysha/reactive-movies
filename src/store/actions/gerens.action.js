@@ -1,4 +1,4 @@
-import HttpClient from './../../services/httpClient';
+import HttpClient from '../../services/movies.httpClient';
 
 export const fetchGenresList = () => dispatch => {
     return HttpClient.getGenresList()
