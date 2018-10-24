@@ -11,10 +11,10 @@ export const clearMoviesList = () => dispatch => {
 
 export const fetchMoviesListByGenreId = (id, page) => dispatch => {
     return HttpClient.getMoviesByGenre(id, page)
-        .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res.results}));
+        .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res}));
 };
 
 export const fetchMoviesByKey = (key, page) => dispatch => {
     return HttpClient.findMovies(key, page)
-        .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res.results}));
+        .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res}));
 }

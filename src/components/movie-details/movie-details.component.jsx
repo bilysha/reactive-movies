@@ -34,7 +34,7 @@ class MovieDetails extends React.Component {
 
     componentDidUpdate() {
         if (this.votesContainer) {
-            this.votesContainer.style = `background: linear-gradient(to right, orangered 0%, orangered ${this.state.movie.vote_average * 10}%, ${this.state.movie.vote_average * 10}%, #fff 100%);`;
+            this.votesContainer.style = `background: linear-gradient(to right, #4085B1 0%, #4085B1 ${this.state.movie.vote_average * 10}%, ${this.state.movie.vote_average * 10}%, #fff 100%);`;
         }
     }
 

@@ -21,7 +21,6 @@ class MoviesList extends React.Component {
     }
 
     componentWillMount() {
-        console.log(this.props)
         this.uploadMoviesList();
     }
 
@@ -33,7 +32,6 @@ class MoviesList extends React.Component {
 
     uploadMoviesList(url) {
         if (this.props.moviesList && this.props.moviesList.length) {
-            console.log('clear')
             this.props.onClearMoviesList();
         }
 
@@ -111,11 +109,11 @@ export default connect(
         },
 
         onFetchMoviesListByGenreId: (id, page) => {
-            return dispatch(fetchMoviesListByGenreId(id));
+            return dispatch(fetchMoviesListByGenreId(id, page));
         },
 
         onFetchMoviesByKey: (key, page) => {
-            return dispatch(fetchMoviesByKey(key));
+            return dispatch(fetchMoviesByKey(key, page));
         },
 
         onSwitchActiveFilter: (filter) => {
