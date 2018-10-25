@@ -2,7 +2,8 @@ const initialState = {
     sessionId: null,
     requestInProgress: false,
     user: null,
-    loggedIn: false
+    loggedIn: false,
+    favoriteList: [1,2,3]
 };
 
 export default function account(state = initialState, action) {
@@ -30,6 +31,11 @@ export default function account(state = initialState, action) {
             }
         case 'SET_USER_LOG_OUT':
             return initialState;
+        case 'ADD_TO_FAVORITE_LIST':
+            state.favoriteList.push(action.payload)
+            return {
+                ...state
+            };
         default:
             return state;
     }

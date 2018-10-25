@@ -1,13 +1,12 @@
 .movie-details {
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-    border-collapse: collapse;
     position: relative;
+    color: #444;
 }
 
 .movie-details article {
-    border-top: 2px solid #ccc;
+    border-top: 5px solid #eee;
     position: relative;
     padding: 20px;
 }
@@ -16,11 +15,10 @@
     position: absolute;
     top: 0;
     left: 20px;
-    transform: translate(0, -50%);
-    background-color: #ccc;
+    transform: translate(0, -60%);
+    background-color: #eee;
     width: 160px;
     padding: 5px 10px;
-    border: 2px solid #ccc;
     border-radius: 5px;
     font-weight: bold;
 }
@@ -91,8 +89,6 @@
 .movie-details_poster {
     width: 100%;
     margin-top: 20px;
-    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-    border-collapse: collapse;
 }
 
 .movie-details_tagline {
@@ -142,12 +138,13 @@
 }
 
 .movie-details_video .video-wrapper ul li:hover {
-    background-color: #ccc;
-    color: #222;
+    background-color: #eee;
+    color: #444;
 }
 
 .movie-details_video .video-wrapper ul li.active {
     background-color: #4085B1;
+    color: #fff;
 }
 
 .movie-details_genres ul li, .movie-details_companies ul li {

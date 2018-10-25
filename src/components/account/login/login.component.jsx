@@ -15,7 +15,7 @@ export default class LoginPage extends React.Component{
                                 also you will be able to estimate the movie. In addition, you will have the opportunity to add movies to your favorites.</p>
                         </article>
                         <article className='login-page_login_form-container'>
-                            <form>
+                            <form className='shadow'>
                                 <label> Login : <input type='text' name='login' ref={(input) => this.loginInput = input} /> </label>
                                 <label> Password : <input type='password' name='user-password' ref={(input) => this.passwordInput = input} /> </label>
                                 <span className='password_hint'>Make sure it's more than 15 characters, or at least 7 characters, and including a number.</span>
@@ -35,7 +35,7 @@ export default class LoginPage extends React.Component{
                         <a href='https://www.themoviedb.org/account/signup' target='blank' className='sign-up'>Sign Up</a>
                     </section>
                     <section className='login-page_benefits-container'>
-                        <article className='benefits-list'>
+                        <article className='benefits-list shadow'>
                             <p>Benefits of being a member</p>
                             <ul>
                                 <li>Log the movies and TV shows you have watched</li>

@@ -3,9 +3,34 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import { markAsFavorite } from './../../../store/actions/user.action';
+
 import './movie.component.css';
 
 class Movie extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.markAsFavorite = this.markAsFavorite.bind(this);
+        this.addToWatchList = this.addToWatchList.bind(this);
+    }
+
+    markAsFavorite() {
+        const { sessionId, loggedIn, user } = this.props.account;
+
+        loggedIn ?
+            this.props.onMarkAsFavorite({account_id: user.id, session_id: sessionId, media_id: this.props.movie.id})
+        :
+            console.log('not logged in', this.props.account)
+    }
+
+    addToWatchList() {
+        this.props.account.loggedIn ?
+            console.log('send add request')
+        :
+            console.log('not logged in')
+    }
+
     sliceMovieOverview() {
         const { overview } = this.props.movie;
 
@@ -37,10 +62,7 @@ class Movie extends React.Component {
                         null
             );
 
-            acc.push({
-                id,
-                name
-            });
+            acc.push({ id, name});
 
             return acc;
         },[]);
@@ -71,12 +93,15 @@ class Movie extends React.Component {
                             {movie.title}
                         </h3>
                     </Link>
-                    <i className="fa fa-star"></i>
+                    <div className='movie-actions'>
+                        <i className={`fa fa-heart ${this.props.account.favoriteList.indexOf(movie.id) > 0 ? 'favorite' : ''}`}></i>
+                        <i className="fa fa-list"></i>
+                    </div>
                 </div>
                 <article className='movie-body'>
                     <figure>
                         <div className='movie_img-wrapper'>
-                            <img className='movie_img' src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' tabIndex='0' />
+                            <img className='movie_img shadow' src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' tabIndex='0' />
                         </div>
                         <figcaption>
                             <article className='movie-body_genres'>
@@ -111,7 +136,12 @@ class Movie extends React.Component {
 
 export default connect(
     state => ({
-        genresList: state.genresList
+        genresList: state.genresList,
+        account: state.account
     }),
-    dispatch => ({})
+    dispatch => ({
+        onMarkAsFavorite: (params) => {
+            dispatch(markAsFavorite(params));
+        }
+    })
 )(Movie);

@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
 
 import logo from './logo.svg';
@@ -7,9 +8,10 @@ import './styles/App.css';
 import Home from './components/home/home.component';
 import User from './components/account/account.component';
 
-class App extends Component {
-
+class App extends React.Component {
   render() {
+    const { account } = this.props;
+
     return (
       <div className="App">
         <header>

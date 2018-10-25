@@ -49,6 +49,30 @@ export const HttpClient = {
 
     getAccountDetails: (session_id) => {
         return sendRequest(`https://api.themoviedb.org/3/account?api_key=${apiKey}&session_id=${session_id}`);
+    },
+
+    markAsFavorite: (params) => {
+        const { account_id, session_id, media_id } = params;
+
+        let myHeaders = new Headers();
+
+        myHeaders.append("Content-Type", "application/json");
+
+        const options = {
+            method: 'POST',
+            body: JSON.stringify({
+                'media_type': 'movie',
+                'media_id': media_id,
+                'favorite': true
+            }),
+            headers: myHeaders
+        };
+
+        return sendRequest(`https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${apiKey}&session_id=${session_id}`, options);
+    },
+
+    getUserFavoriteMovies: () => {
+        return sendRequest(`https://api.themoviedb.org/3/account/{account_id}/favorite/movies?api_key=${apiKey}&language=en-US&page=1`);
     }
 };
 

@@ -1,7 +1,5 @@
 .paginator {
     background-color: #fff;
-    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
-    border-collapse: collapse;
     width: 100%;
     padding: 20px;
 }
@@ -17,8 +15,7 @@
     margin: 0 10px;
     padding: 10px;
     border-radius: 0;
-    box-shadow: 0px 0px 1px rgba(0,0,0,0.5);
-    border-collapse: collapse;
+    border: 1px solid #ccc;
 }
 
 .paginator ul li.active {
@@ -33,7 +30,7 @@
 .paginator ul li.dotted_li {
     padding: 10px 0 0 0;
     margin: 0;
-    box-shadow: none;
+    border: none;
 }
 
 .paginator ul li.dotted_li:hover {
