@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Switch, Route, Link, Redirect, NavLink } from 'react-router-dom';
 
 import logo from './logo.svg';
@@ -10,8 +9,6 @@ import User from './components/account/account.component';
 
 class App extends React.Component {
   render() {
-    const { account } = this.props;
-
     return (
       <div className="App">
         <header>

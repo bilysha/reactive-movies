@@ -36,20 +36,20 @@ class Home extends React.Component {
                 <Navigation adjustPosterPath={this.adjustPosterPath} />
                 <Switch>
                     <Route
-                    exact path={`/home`}
-                    render={() => <Redirect to={`/home/popular/-1/page/1`} />}
+                        exact path={`/home`}
+                        render={() => <Redirect to={`/home/popular/-1/page/1`} />}
                     />
                     <Route
-                    path={`/home/:filter/:filter_id/page/:page`}
-                    render={(props) => (
-                        <MoviesList {...props} adjustPosterPath={this.adjustPosterPath} votesStars={votesStars} setVotes={this.setVotes}/>
-                    )}
+                        path={`/home/:filter/:filter_id/page/:page`}
+                        render={(props) => (
+                            <MoviesList {...props} adjustPosterPath={this.adjustPosterPath} adjustBackdropPath={this.adjustBackdropPath} votesStars={votesStars} setVotes={this.setVotes}/>
+                        )}
                     />
                     <Route
-                    path={`/home/movie/:movieId`}
-                    render={(props) => (
-                        <MovieDetails {...props} adjustPosterPath={this.adjustPosterPath} adjustBackdropPath={this.adjustBackdropPath} votesStars={votesStars} />
-                    )}
+                        path={`/home/movie/:movieId`}
+                        render={(props) => (
+                            <MovieDetails {...props} adjustPosterPath={this.adjustPosterPath} adjustBackdropPath={this.adjustBackdropPath} votesStars={votesStars} />
+                        )}
                     />
                 </Switch>
             </section>

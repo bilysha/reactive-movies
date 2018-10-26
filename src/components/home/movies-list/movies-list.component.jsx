@@ -1,7 +1,13 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchMoviesList, fetchMoviesListByGenreId, clearMoviesList, fetchMoviesByKey } from './../../../store/actions/movies.action';
+import { 
+    fetchMoviesList,
+    fetchMoviesListByGenreId,
+    clearMoviesList,
+    fetchMoviesByKey,
+    fetchMoviesCollection
+} from './../../../store/actions/movies.action';
 import { switchActiveFilter } from './../../../store/actions/common.action';
 
 import { userFilters } from './../../../constants/user-filters';
@@ -44,6 +50,9 @@ class MoviesList extends React.Component {
             case 'search':
                 return this.props.onFetchMoviesByKey(urlParams.filter_id, urlParams.page)
                     .then(() => this.props.onSwitchActiveFilter(`'${urlParams.filter_id}' search results`));
+            case 'collection':
+                return this.props.onFetchMoviesCollection(urlParams.filter_id)
+                    .then(() => this.props.onSwitchActiveFilter(`${this.props.collection.name} collection`));
             default:
                 return this.props.onFetchMoviesList(urlParams.filter, urlParams.page)
                     .then(() => this.props.onSwitchActiveFilter(this.decodeUserFilter(urlParams.filter)));
@@ -65,12 +74,20 @@ class MoviesList extends React.Component {
     }
 
     render() {
-        const { moviesList } = this.props;
+        const { moviesList, collection } = this.props;
 
         return (
-            <section className='main-content movies-list'>
+            <section className='movies-list'>
                 {moviesList.length ?
                     <Fragment>
+                        {collection.name ?
+                            <article className='collection-information'>
+                                <img src={this.props.adjustBackdropPath(collection.backdrop_path)} alt='collection_poster' />
+                                <p className='collection-overview'>{collection.overview}</p>
+                            </article>
+                        :
+                            <span></span>
+                        }
                         <ul className='main-content_movies-list'>
                             {moviesList.map((item, index) =>
                                 <Movie
@@ -82,7 +99,12 @@ class MoviesList extends React.Component {
                                 />
                             )}
                         </ul>
-                        <Paginator activePage={this.props.activePage} pages={this.props.totalPages} switchToPage={this.switchToPage}/>
+                        {collection.name ?
+                            <span></span>
+                        :
+                            <Paginator activePage={this.props.activePage} pages={this.props.totalPages} switchToPage={this.switchToPage}/>
+                        }
+                        
                     </Fragment>
                 :
                     <Loader text='Wait please... Loading movies...' />
@@ -97,7 +119,8 @@ export default connect(
         moviesList: state.moviesList.movies,
         totalPages: state.moviesList.pages,
         activePage: state.moviesList.activePage,
-        genresList: state.genresList
+        genresList: state.genresList,
+        collection: state.moviesList.collection
     }), //mapped state to props (state from store to props)
     dispatch => ({
         onFetchMoviesList: (filter, page) => {
@@ -114,6 +137,10 @@ export default connect(
 
         onFetchMoviesByKey: (key, page) => {
             return dispatch(fetchMoviesByKey(key, page));
+        },
+
+        onFetchMoviesCollection: (collection_id) => {
+            return dispatch(fetchMoviesCollection(collection_id));
         },
 
         onSwitchActiveFilter: (filter) => {

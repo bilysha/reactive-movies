@@ -6,16 +6,6 @@
     position: relative;
 }
 
-.movie.favorite {
-    box-shadow: 0px 0px 5px orangered;
-    border-collapse: collapse;
-}
-
-.movie.watchList {
-    box-shadow: 0px -1px 2px #4085B1;
-    border-collapse: collapse;
-}
-
 .movie_title {
     padding: 10px 60px 10px 20px;
     cursor: pointer;
@@ -43,12 +33,12 @@
     color: #ccc;
 }
 
-.movie .movie-actions i.favorite {
+.movie .movie-actions i.favorite.true, .movie .movie-actions i.favorite:hover {
     color: orangered;
 }
 
-.movie .movie-actions i:hover {
-    color: #444;
+.movie .movie-actions i.watchlist.true, .movie .movie-actions i.watchlist:hover {
+    color: #4085B1;
 }
 
 .movie figure {
@@ -128,4 +118,9 @@ img[tabindex="0"]:focus {
     transform: translate(-50%, -50%);
     width: auto;
     height: auto;
+    box-shadow: 0px 0px 10000px 10000px rgba(0, 0, 0, 0.7)
+}
+
+img[tabindex="0"]:focus {
+    pointer-events: none;
 }

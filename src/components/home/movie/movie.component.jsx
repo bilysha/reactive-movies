@@ -94,8 +94,8 @@ class Movie extends React.Component {
                         </h3>
                     </Link>
                     <div className='movie-actions'>
-                        <i className={`fa fa-heart ${this.props.account.favoriteList.indexOf(movie.id) > 0 ? 'favorite' : ''}`}></i>
-                        <i className="fa fa-list"></i>
+                        <i className={`fa fa-heart favorite ${this.props.account.favoriteList.indexOf(movie.id) > 0 ? 'true' : ''}`}></i>
+                        <i className={`fa fa-list watchlist ${this.props.account.watchList.indexOf(movie.id) > 0 ? 'true' : ''}`}></i>
                     </div>
                 </div>
                 <article className='movie-body'>
@@ -128,7 +128,7 @@ class Movie extends React.Component {
                     <p className='movie-body_vote' ref={(p) => this.votesContainer = p}>
                         <img src={this.props.votesStars} alt='votes_image' />
                     </p>
-                    </article>
+                </article>
             </section>
         )
     }

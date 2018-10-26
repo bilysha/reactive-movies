@@ -16,6 +16,8 @@
     padding: 10px;
     border-radius: 0;
     border: 1px solid #ccc;
+    min-width: 35px;
+    text-align: center;
 }
 
 .paginator ul li.active {

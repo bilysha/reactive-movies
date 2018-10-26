@@ -3,7 +3,8 @@ const initialState = {
     requestInProgress: false,
     user: null,
     loggedIn: false,
-    favoriteList: [1,2,3]
+    favoriteList: [],
+    watchList: []
 };
 
 export default function account(state = initialState, action) {
