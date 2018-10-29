@@ -115,7 +115,7 @@ class MoviesList extends React.Component {
 }
 
 export default connect(
-    state => ({
+    (state) => ({
         moviesList: state.moviesList.movies,
         totalPages: state.moviesList.pages,
         activePage: state.moviesList.activePage,

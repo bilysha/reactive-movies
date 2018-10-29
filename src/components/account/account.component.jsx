@@ -38,6 +38,7 @@ class User extends React.Component {
                     loggedIn ?
                         <UserPage
                             user={user}
+                            userImage={userImage}
                             closeLoginSession={this.closeLoginSession}
                         />
                     :
