@@ -19,6 +19,10 @@ export const fetchMoviesByKey = (key, page) => dispatch => {
         .then(res => dispatch({type: 'ADD_MOVIES_LIST', payload: res}));
 };
 
+export const fetchMoviesByKeyShortlist = (key) => dispatch => {
+    return HttpClient.findMovies(key, 1);
+};
+
 export const fetchMoviesCollection = (collection_id) => dispatch => {
     return HttpClient.getCollection(collection_id)
         .then((res) => dispatch({type: 'ADD_COLLECTION', payload: res}));

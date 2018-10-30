@@ -1,14 +1,6 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import './navigation.component.css';
-import { fetchGenresList } from '../../../store/actions/gerens.action';
-import { fetchMoviesByKey } from './../../../store/actions/movies.action';
-
-import HttpClient from '../../../services/movies.httpClient';
-
-import { userFilters } from './../../../constants/user-filters';
 
 import Loader from './../../loader/loader.component';
 
@@ -17,56 +9,39 @@ class Navigation extends React.Component {
         super(props);
 
         this.state = {
-            collapsed: false,
-            searchResults: null
+            collapsed: false
         };
-
-        this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
-    }
-
-    componentWillMount() {
-        this.props.onFetchGenresList();
-    }
-
-    transformSearchRequest(response) {
-        if (response.results.length > 3) {
-            this.setState({searchResults: response.results.splice(0, 3)})
-        } else {
-            this.setState({searchResults: response.results});
-        }
-    }
-
-    handleSearchInputChange() {
-        if (this.searchIput.value.length > 2) {
-            HttpClient.findMovies(this.searchIput.value)
-                .then(res => this.transformSearchRequest(res));
-        } else {
-            this.setState({searchResults: null});
-        }
     }
 
     render() {
-        const genres = this.props.genresList;
+        const {
+            genresList,
+            redirect,
+            userFilters,
+            searchResults,
+            handleSearchInputChange,
+            activeFilter,
+            adjustPosterPath
+        } = this.props;
 
         return (
-            <section className={`side-menu navigation collapsed-${this.state.collapsed} ${genres.length ? '' : 'loading'}`}>
-                {genres.length ?
+            <section className={`side-menu navigation collapsed-${this.state.collapsed} ${genresList.length ? '' : 'loading'}`}>
+                {genresList.length ?
                     <Fragment>
                         <article className='navigation_short-info'>
-                            <p className='navigation-active-filter'>{ this.props.activeFilter }</p>
+                            <p className='navigation-active-filter'>{ activeFilter }</p>
                             <form className='navigation_search' onSubmit={(e) => e.preventDefault()}>
                                 <input
                                     type="text"
                                     name="name"
                                     ref={(input) => this.searchIput = input}
-                                    onChange={this.handleSearchInputChange}
+                                    onChange={() => handleSearchInputChange(this.searchIput.value)}
                                     className={`${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}
                                 />
-                                <Link
-                                    to={`/home/search/${this.searchIput ? this.searchIput.value : ''}/page/1`}
-                                    className={`link navigation_search_btn ${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}>
-                                        Search
-                                </Link>
+                                <button
+                                    onClick={() => redirect(`/home/search/${this.searchIput ? this.searchIput.value : ''}/page/1`)}
+                                    className={`navigation_search_btn ${this.searchIput ? this.searchIput.value.length > 3 ? 'enable' : 'disabled' : 'disabled'}`}
+                                > Search </button>
                             </form>
                             <span className='navigation_short-info_collapse_btn' onClick={() => this.setState({collapsed: !this.state.collapsed})}>
                                 <i className="fa fa-chevron-down"></i>
@@ -75,11 +50,9 @@ class Navigation extends React.Component {
                         <div className='navigation_main-content'>
                             <article className='navigation-genres-list'>
                                 <ul>
-                                    {genres.map((genre, index) => 
-                                        <li key={index}>
-                                            <Link to={`/home/genre/${genre.id}/page/1`} className='dark-link'>
-                                                {genre.name}
-                                            </Link>
+                                    {genresList.map((genre, index) => 
+                                        <li key={index} onClick={() => redirect(`/home/genre/${genre.id}/page/1`)}>
+                                            {genre.name}
                                         </li>
                                     )}
                                 </ul>
@@ -87,56 +60,38 @@ class Navigation extends React.Component {
                             <article className='navigation-filters-list'>
                                 <ul>
                                     {userFilters.map((filter, index) => 
-                                        <li key={index}>
-                                            <Link to={`/home/${filter.linkName}/-1/page/1`} className='dark-link'>
-                                                {filter.name}
-                                            </Link>
+                                        <li key={index} onClick={() => redirect(`/home/${filter.linkName}/-1/page/1`)}>
+                                            {filter.name}
                                         </li>
                                     )}
                                 </ul>
                             </article>
                             <article className='navigation-search-results'>
-                                {this.state.searchResults ?
+                                {searchResults ?
                                     <ul>
-                                        {this.state.searchResults.map((movie, index) => 
-                                            <li key={index}>
+                                        {searchResults.map((movie, index) => 
+                                            <li key={index} onClick={() => redirect(`/home/movie/${movie.id}`)}>
                                                 <figure>
-                                                    <img src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' />
+                                                    <img src={adjustPosterPath(movie.poster_path)} alt='movie_poster' />
                                                     <figcaption>
-                                                        <Link to={`/home/movie/${movie.id}`} className='dark-link'>
-                                                            {movie.title}
-                                                        </Link>
+                                                        {movie.title}
                                                     </figcaption>
                                                 </figure>
                                             </li>
                                         )}
                                     </ul>
                                 :
-                                    <p></p>
+                                    ''
                             }
                             </article>
                         </div>
                     </Fragment>
                 :
-                    <Loader text='Wait please... Loading information...' />
+                    <Loader text='Wait please... Loading genres information...' />
                 }
             </section>
         )
     }
 }
 
-export default connect(
-    state => ({
-        genresList: state.genresList,
-        activeFilter: state.common
-    }), //mapped state to props (state from store to props)
-    dispatch => ({
-        onFetchGenresList: () => {
-            dispatch(fetchGenresList())
-        },
-
-        onFetchMoviesByKey: (key) => {
-            dispatch(fetchMoviesByKey(key));
-        }
-    })
-)(Navigation);
+export default Navigation;
