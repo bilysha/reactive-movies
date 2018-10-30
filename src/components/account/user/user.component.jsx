@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import HttpClient from './../../../services/user.httpClient';
+
+import MoviesList from './../../home/movies-list/movies-list.component';
+
 import './user.component.css';
 
 class UserPage extends React.Component {
@@ -23,7 +27,20 @@ class UserPage extends React.Component {
         this.toggleUserAction = this.toggleUserAction.bind(this);
     }
 
+    componentWillMount() {
+        const { account } = this.props;
+
+        switch(this.state.activeAction) {
+            case 'Favorite':
+                return HttpClient.getUserFavoriteMovies(account.user.id, account.sessionId)
+                    .then((res) => console.log(res));
+            default:
+                return ;
+        }
+    }
+
     toggleUserAction(name) {
+        console.log(this.props.state);
         this.setState({activeAction: name});
     }
 
@@ -50,6 +67,9 @@ class UserPage extends React.Component {
                         )}
                     </article>
                 </section>
+                <section className='user_movies-container'>
+                    
+                </section>
                 <button onClick={this.props.closeLoginSession}>Log Out</button>
             </section>
         )
@@ -57,7 +77,7 @@ class UserPage extends React.Component {
 }
 
 export default connect(
-    state => ({}),
+    state => ({account: state.account}),
     dispatch => ({})
 )
 (UserPage);

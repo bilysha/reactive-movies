@@ -1,4 +1,4 @@
-const apiKey = '07dc8f6435c41ca3ef4a46c9a0f91344';
+ const apiKey = '07dc8f6435c41ca3ef4a46c9a0f91344';
 
 export const HttpClient = {
     getRequestToken: () => {
@@ -71,8 +71,8 @@ export const HttpClient = {
         return sendRequest(`https://api.themoviedb.org/3/account/${account_id}/favorite?api_key=${apiKey}&session_id=${session_id}`, options);
     },
 
-    getUserFavoriteMovies: () => {
-        return sendRequest(`https://api.themoviedb.org/3/account/{account_id}/favorite/movies?api_key=${apiKey}&language=en-US&page=1`);
+    getUserFavoriteMovies: (account_id, session_id) => {
+        return sendRequest(`https://api.themoviedb.org/3/account/${account_id}/favorite/movies?api_key=${apiKey}&language=en-US&page=1&session_id=${session_id}`);
     }
 };
 
