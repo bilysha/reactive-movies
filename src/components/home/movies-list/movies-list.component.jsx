@@ -27,10 +27,12 @@ class MoviesList extends React.Component {
     }
 
     componentWillMount() {
+        console.log('list mount')
         this.uploadMoviesList();
     }
 
     componentWillReceiveProps(nextProps, prevProps) {
+        console.log('list recieve')
         if (!prevProps.location && nextProps.location.pathname !== this.props.location.pathname) {
             this.uploadMoviesList(nextProps.match.params);
         }
@@ -42,6 +44,8 @@ class MoviesList extends React.Component {
         }
 
         const urlParams = url || this.props.match.params;
+
+        this.props.onSwitchActiveFilter('Upadating ...');
 
         switch(urlParams.filter) {
             case 'genre':

@@ -19,11 +19,15 @@ export default class LoginPage extends React.Component{
                                 <label> Login : <input type='text' name='login' ref={(input) => this.loginInput = input} /> </label>
                                 <label> Password : <input type='password' name='user-password' ref={(input) => this.passwordInput = input} /> </label>
                                 <span className='password_hint'>Make sure it's more than 15 characters, or at least 7 characters, and including a number.</span>
-                                <input
-                                    type='submit'
-                                    value={`${this.props.requestInProgress ? '??' : 'Log In'}`}
+                                <button
                                     onClick={(e) => this.props.createLoginSession(e, this.loginInput.value, this.passwordInput.value)}
-                                />
+                                >
+                                    {this.props.requestInProgress ?
+                                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                    :
+                                        <span>Log In</span>
+                                }
+                                </button>
                             </form>
                         </article>
                     </section>

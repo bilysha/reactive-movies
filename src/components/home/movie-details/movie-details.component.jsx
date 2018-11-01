@@ -57,9 +57,9 @@ class MovieDetails extends React.Component {
                      this.setState({
                         movie: movie,
                         collection: {name: movieData[0].name, id: movieData[0].id},
-                        collectionParts: this.sliceArray(movieData[0].parts, 5),
+                        collectionParts: this.sliceArray(movieData[0].parts, 7),
                         cast: this.sliceArray(movieData[1].cast, 10),
-                        similarMovies: this.sliceArray(movieData[2].results, 5),
+                        similarMovies: this.sliceArray(movieData[2].results, 7),
                         movieVideos: movieData[3].results ? movieData[3].results : [],
                         activeVideo: movieData[3].results ? movieData[3].results[0] : {}
                     });
@@ -165,7 +165,7 @@ class MovieDetails extends React.Component {
                                 {this.state.collectionParts ?
                                     <Fragment>
                                         <p className='movie-details_no-data'>
-                                            <Link to={`/home/collection/${this.state.collection.id}/page/1`}>{this.state.collection.name}</Link>
+                                            <Link to={`/home/collection/${this.state.collection.id}/page/1`} className='dark-link'>{this.state.collection.name}</Link>
                                         </p>
                                         <ul>
                                             {this.state.collectionParts.map((part, index) =>

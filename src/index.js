@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { syncHistoryWithStore } from 'react-router-redux';
+//import { syncHistoryWithStore } from 'react-router-redux';
 
 import history from './history';
 

@@ -28,9 +28,9 @@
 }
 
 .movie-details ul li {
-    margin-right: 10px;
     padding: 5px;
-    max-width: 20%;
+    max-width: 14%;
+    min-width: 14%;
 }
 
 .movie-details ul li:hover .dark-link, .movie-details ul li:hover .colored-link {
@@ -39,7 +39,7 @@
 
 .movie-details ul li figure img {
     display: block;
-    max-width: 200px;
+    max-width: 100%;
     margin: 0 auto;
     border: 1px solid #ccc;
 }
@@ -47,6 +47,9 @@
 .movie-details figure figcaption {
     margin-top: 10px;
     text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .movie-details_votes {

@@ -50,27 +50,30 @@ class UserPage extends React.Component {
         return (
             <section>
                 <section className="top">
-                    <article className='user-information'>
-                        <p>Username : <span className='name'>{user.username}</span></p>
-                        <img src={this.props.userImage} alt='user_avatar' />
-                        <p>Name : <span className='name'>{user.name}</span></p>
-                    </article>
-                    <article className='tabs-container'>
-                        {this.userActions.map((item, index) => 
-                            <button
-                                key={index}
-                                className={`${item.name === this.state.activeAction ? 'active' : ''}`}
-                                onClick={() => this.toggleUserAction(item.name)}
-                            >
-                                {item.name}
-                            </button>
-                        )}
-                    </article>
+                    <section className='user-information'>
+                        <article>
+                            <p>Username : <span className='name'>{user.username}</span></p>
+                            <img src={this.props.userImage} alt='user_avatar' />
+                            <p>Name : <span className='name'>{user.name}</span></p>
+                        </article>
+                        <article>
+                            <button onClick={this.props.closeLoginSession}>Log Out</button>
+                        </article>
+                    </section>
+                    <section className='tabs-container'>
+                        <article className='tabs-container_btns-container'>
+                            {this.userActions.map((item, index) => 
+                                <button
+                                    key={index}
+                                    className={`${item.name === this.state.activeAction ? 'active' : ''}`}
+                                    onClick={() => this.toggleUserAction(item.name)}
+                                >
+                                    {item.name}
+                                </button>
+                            )}
+                        </article>
+                    </section>
                 </section>
-                <section className='user_movies-container'>
-                    
-                </section>
-                <button onClick={this.props.closeLoginSession}>Log Out</button>
             </section>
         )
     }
@@ -79,5 +82,4 @@ class UserPage extends React.Component {
 export default connect(
     state => ({account: state.account}),
     dispatch => ({})
-)
-(UserPage);
+)(UserPage);
