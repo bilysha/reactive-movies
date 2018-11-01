@@ -48,31 +48,29 @@ class UserPage extends React.Component {
         const { user } = this.props;
 
         return (
-            <section>
-                <section className="top">
-                    <section className='user-information'>
-                        <article>
-                            <p>Username : <span className='name'>{user.username}</span></p>
-                            <img src={this.props.userImage} alt='user_avatar' />
-                            <p>Name : <span className='name'>{user.name}</span></p>
-                        </article>
-                        <article>
-                            <button onClick={this.props.closeLoginSession}>Log Out</button>
-                        </article>
-                    </section>
-                    <section className='tabs-container'>
-                        <article className='tabs-container_btns-container'>
-                            {this.userActions.map((item, index) => 
-                                <button
-                                    key={index}
-                                    className={`${item.name === this.state.activeAction ? 'active' : ''}`}
-                                    onClick={() => this.toggleUserAction(item.name)}
-                                >
-                                    {item.name}
-                                </button>
-                            )}
-                        </article>
-                    </section>
+            <section className='user-page'>
+                <section className='user-information'>
+                    <article>
+                        <p>Username : <span className='name'>{user.username}</span></p>
+                        <img src={this.props.userImage} alt='user_avatar' />
+                        <p>Name : <span className='name'>{user.name}</span></p>
+                    </article>
+                    <article>
+                        <button onClick={this.props.closeLoginSession}>Log Out</button>
+                    </article>
+                </section>
+                <section className='tabs-container'>
+                    <article className='tabs-container_btns-container'>
+                        {this.userActions.map((item, index) => 
+                            <button
+                                key={index}
+                                className={`${item.name === this.state.activeAction ? 'active' : ''}`}
+                                onClick={() => this.toggleUserAction(item.name)}
+                            >
+                                {item.name}
+                            </button>
+                        )}
+                    </article>
                 </section>
             </section>
         )

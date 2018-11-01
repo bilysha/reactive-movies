@@ -17,7 +17,7 @@ import Loader from './../../loader/loader.component';
 
 import Paginator from './../../paginator/paginator.component';
 
-import './movies-list.component.css';
+import './movies-list.component.grid.css';
 
 class MoviesList extends React.Component {
     constructor(props) {
@@ -92,7 +92,7 @@ class MoviesList extends React.Component {
                         :
                             <span></span>
                         }
-                        <ul className='main-content_movies-list'>
+                        <div className='main-content_movies-list'>
                             {moviesList.map((item, index) =>
                                 <Movie
                                     key={index}
@@ -101,8 +101,9 @@ class MoviesList extends React.Component {
                                     setVotes={this.props.setVotes}
                                     movie={item}
                                 />
-                            )}
-                        </ul>
+                            )
+                        }
+                        </div>
                         {collection.name ?
                             <span></span>
                         :

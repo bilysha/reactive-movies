@@ -1,21 +1,21 @@
-.top {
+.user-page {
     display: flex;
     border-bottom: 1px solid #ccc;
 }
 
-.top .user-information {
+.user-page .user-information {
     border-right: 1px solid #ccc;
 }
 
-.top .user-information article {
+.user-page .user-information article {
     padding: 20px;
 }
 
-.top .user-information article:first-child {
+.user-page .user-information article:first-child {
     border-bottom: 1px solid #ccc;
 }
 
-.top .user-information button {
+.user-page .user-information button {
     width: 100%;
     padding: 10px;
     border: none;
@@ -25,15 +25,15 @@
     cursor: pointer;
 }
 
-.top .user-information button:hover {
+.user-page .user-information button:hover {
     background-color: rgb(92, 163, 207);
 }
 
-.top .user-information img {
+.user-page .user-information img {
     margin: 10px;
 }
 
-.top .user-information .name {
+.user-page .user-information .name {
     display: block;
     margin: 5px 0 0 20px;
 }

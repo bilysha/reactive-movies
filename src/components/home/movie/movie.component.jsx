@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { markAsFavorite } from './../../../store/actions/user.action';
 
-import './movie.component.css';
+import './movie.component.grid.css';
 
 class Movie extends React.Component {
     constructor(props) {
@@ -34,8 +34,8 @@ class Movie extends React.Component {
     sliceMovieOverview() {
         const { overview } = this.props.movie;
 
-        return overview.length > 100 ?
-            `${overview.slice(0, 97)}...`
+        return overview.length > 90 ?
+            `${overview.slice(0, 87)}...`
         :
             overview;
     }
@@ -43,8 +43,8 @@ class Movie extends React.Component {
     spliceMovieGenres() {
         const { genre_ids } = this.props.movie;
 
-        return genre_ids.length > 4 ?
-            genre_ids.splice(3, genre_ids.length - 3 )
+        return genre_ids.length > 3 ?
+            genre_ids.splice(0, 3 )
         :
             genre_ids;
     }
@@ -88,46 +88,42 @@ class Movie extends React.Component {
         return (
             <section className='movie'>
                 <div className='movie-header'>
-                    <Link to={`/home/movie/${this.props.movie.id}`} className='colored-link'>
-                        <h3 className='movie_title'>
-                            {movie.title}
-                        </h3>
-                    </Link>
-                    <div className='movie-actions'>
-                        <i className={`fa fa-heart favorite ${this.props.account.favoriteList.indexOf(movie.id) > 0 ? 'true' : ''}`}></i>
-                        <i className={`fa fa-list watchlist ${this.props.account.watchList.indexOf(movie.id) > 0 ? 'true' : ''}`}></i>
-                    </div>
+                    <h3 className='movie_title' onClick={() => this.props.redirect(`/home/movie/${this.props.movie.id}`)}>
+                        {movie.title}
+                    </h3>
+                    <i className={`fa fa-heart favorite ${this.props.account.favoriteList.indexOf(movie.id) > 0 ? 'true' : ''}`}></i>
+                    <i className={`fa fa-list watchlist ${this.props.account.watchList.indexOf(movie.id) > 0 ? 'true' : ''}`}></i>
                 </div>
-                <article className='movie-body'>
-                    <figure>
-                        <div className='movie_img-wrapper'>
-                            <img className='movie_img shadow' src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' tabIndex='0' />
-                        </div>
-                        <figcaption>
-                            <article className='movie-body_genres'>
-                                <p className='bold'>Genre :</p>
-                                <ul>
-                                    {this.spliceMovieGenres().map((genre, index) => 
-                                        <li key={index}>
-                                            <Link to={`/home/genre/${genre.id}/page/1`} className='dark-link'>
-                                                {genre.name}
-                                            </Link>
-                                        </li>
-                                    )}
-                                </ul>
-                            </article>
-                            <p className='movie-body_release bold'>
-                                Release :
-                                <span>{movie.release_date}</span>
-                            </p>
-                        </figcaption>
-                    </figure>
-                    <p className='movie-body_overview'>
-                        {this.sliceMovieOverview()}
-                    </p>
-                    <p className='movie-body_vote' ref={(p) => this.votesContainer = p}>
+                <figure>
+                    <div className='movie_img-wrapper'>
+                        <img className='movie_img shadow' src={this.props.adjustPosterPath(movie.poster_path)} alt='movie_poster' tabIndex='0' />
+                    </div>
+                    <figcaption>
+                        <article className='movie-body_genres'>
+                            <p className='bold'>Genre :</p>
+                            <ul>
+                                {this.spliceMovieGenres().map((genre, index) => 
+                                    <li key={index}>
+                                        <Link to={`/home/genre/${genre.id}/page/1`} className='dark-link'>
+                                            {genre.name}
+                                        </Link>
+                                    </li>
+                                )}
+                            </ul>
+                        </article>
+                        <p className='movie-body_release bold'>
+                            Release :
+                            <span>{movie.release_date}</span>
+                        </p>
+                    </figcaption>
+                </figure>
+                <p className='movie-body_overview'>
+                    {this.sliceMovieOverview()}
+                </p>
+                <article className='movie-body_vote-container'>
+                    <div className='vote' ref={(p) => this.votesContainer = p}>
                         <img src={this.props.votesStars} alt='votes_image' />
-                    </p>
+                    </div>
                 </article>
             </section>
         )

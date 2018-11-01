@@ -1,8 +1,80 @@
 .movie {
+    background-color: #fff;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 5px;
+    grid-template-rows: 0.2fr 1fr 0.4fr 0.01fr;
 }
 
 .movie .movie-header {
-    grid-column: 1/6;
+    display: grid;
+    grid-template-columns: 7fr 1fr 1fr;
+}
+
+.movie .movie-header h3, .movie .movie-header i {
+    cursor: pointer;
+}
+
+.movie .movie-header h3 {
+    font-weight: bold;
+    color: #4085B1;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movie .movie-header h3:hover {
+    background: linear-gradient(90deg, #4085B1, #fff) ;
+    color: #fff;
+}
+
+.movie .movie-header i {
+    text-align: center;
+    margin: 15px 10px;
+    color: #ccc;
+}
+
+.movie .movie-header i.favorite:hover {
+    color: orangered;
+}
+
+.movie .movie-header i.watchlist:hover {
+    color: #4085B1;
+}
+
+.movie figure {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.movie figure img, .movie figure .movie_img-wrapper {
+    max-width: 100%;
+    min-width: 100%;
+}
+
+.movie figure .movie-body_release span {
+    display: block;
+    margin: 10px 0 0 20px;
+    font-weight: normal;
+}
+
+.movie-body_overview {
+    padding: 10px;
+    text-align: justify;
+    overflow: hidden;
+}
+
+.movie-body_vote-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.movie-body_vote-container .vote {
+    grid-column-start: 4;
+}
+
+.movie-body_vote-container .vote img {
+    display: block;
+    width: 100%;
 }
