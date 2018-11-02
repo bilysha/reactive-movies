@@ -15,6 +15,8 @@ import MovieDetails from './movie-details/movie-details.component';
 
 import { userFilters } from './../../constants/user-filters';
 
+import './home.component.css';
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -110,7 +112,7 @@ class Home extends React.Component {
 
     render() {
         return (
-            <section>
+            <section className='home-container'>
                 <Navigation
                     genresList={this.props.genresList}
                     activeFilter={this.props.activeFilter}
@@ -134,6 +136,7 @@ class Home extends React.Component {
                                 adjustBackdropPath={this.adjustBackdropPath}
                                 votesStars={votesStars}
                                 setVotes={this.setVotes}
+                                redirect={this.redirect}
                             />
                         )}
                     />

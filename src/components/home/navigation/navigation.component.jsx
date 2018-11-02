@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import './navigation.component.css';
+import './navigation.component.grid.css';
 
 import Loader from './../../loader/loader.component';
 
@@ -29,7 +29,7 @@ class Navigation extends React.Component {
                 {genresList.length ?
                     <Fragment>
                         <article className='navigation_short-info'>
-                            <p className='navigation-active-filter'>{ activeFilter }</p>
+                            <h3 className='navigation-active-filter'>{ activeFilter }</h3>
                             <form className='navigation_search' onSubmit={(e) => e.preventDefault()}>
                                 <input
                                     type="text"
@@ -47,7 +47,7 @@ class Navigation extends React.Component {
                                 <i className="fa fa-chevron-down"></i>
                             </span>
                         </article>
-                        <div className='navigation_main-content'>
+                        <div className={`navigation_main-content`}>
                             <article className='navigation-genres-list'>
                                 <ul>
                                     {genresList.map((genre, index) => 

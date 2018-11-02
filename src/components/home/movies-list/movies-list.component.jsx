@@ -90,7 +90,7 @@ class MoviesList extends React.Component {
                                 <p className='collection-overview'>{collection.overview}</p>
                             </article>
                         :
-                            <span></span>
+                            ''
                         }
                         <div className='main-content_movies-list'>
                             {moviesList.map((item, index) =>
@@ -100,12 +100,13 @@ class MoviesList extends React.Component {
                                     votesStars={this.props.votesStars}
                                     setVotes={this.props.setVotes}
                                     movie={item}
+                                    redirect={this.props.redirect}
                                 />
                             )
                         }
                         </div>
                         {collection.name ?
-                            <span></span>
+                            ''
                         :
                             <Paginator activePage={this.props.activePage} pages={this.props.totalPages} switchToPage={this.switchToPage}/>
                         }

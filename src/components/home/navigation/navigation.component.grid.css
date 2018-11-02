@@ -1,0 +1,123 @@
+.navigation {
+    display: grid;
+    transition: all 1s;
+    grid-gap: 5px;
+    overflow: hidden;
+}
+
+.navigation.collapsed-false i {
+    transform: rotate(0deg);
+    transition: all 1s;
+}
+
+.navigation.collapsed-true i {
+    transform: rotate(180deg);
+    transition: all 1s;
+}
+
+.navigation-genres-list,
+.navigation-filters-list,
+.navigation-search-results,
+.navigation_short-info {
+    background-color: #fff;
+}
+
+.navigation_short-info {
+    display: grid;
+    grid-template-columns: 10fr 3fr 0.5fr;
+    padding: 10px;
+}
+
+.navigation_short-info h3 {
+    font-weight: bold;
+    color: #4085B1;
+}
+
+.navigation_short-info form {
+
+}
+
+.navigation_short-info .navigation_short-info_collapse_btn {
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.navigation_short-info .navigation_short-info_collapse_btn:hover {
+    color: #444;
+}
+
+.navigation_main-content {
+    display: grid;
+    grid-template-columns: 4fr 1fr 2fr;
+    grid-gap: 5px;
+    transition: all 1s;
+}
+
+.navigation.collapsed-true .navigation_main-content {
+    max-height: 250px;
+}
+
+.navigation.collapsed-false .navigation_main-content{
+    max-height: 0;
+    display: none;
+}
+
+.navigation-genres-list ul {
+    margin: 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.navigation-filters-list ul, .navigation-search-results ul {
+    margin: 0;
+    padding: 10px;
+}
+
+
+.navigation_short-info form {
+    display: flex;
+}
+
+.navigation_short-info form input[type="text"] {
+    border: 1px solid #4085B1;
+    padding: 5px;
+}
+
+.navigation_search_btn {
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    border-left: none;
+    background-color: #4085B1;
+    border: 1px solid #4085B1;
+    border-left: none;
+    color: #fff;
+}
+
+.navigation_search_btn:hover {
+    color: #4085B1;
+    background-color: #fff;
+}
+
+
+.navigation-search-results figure {
+    display: flex;
+    align-items: center;
+}
+
+.navigation-search-results figure img {
+    max-width: 20px;
+    max-height: 30px;
+}
+
+.navigation-search-results figure figcaption {
+    padding-left: 20px;
+    font-size: 12px;
+    max-width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
