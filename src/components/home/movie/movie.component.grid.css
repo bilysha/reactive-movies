@@ -1,8 +1,0 @@
-.movie {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-}
-
-.movie .movie-header {
-    grid-column: 1/6;
-}
