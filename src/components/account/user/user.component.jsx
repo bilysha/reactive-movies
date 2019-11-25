@@ -40,7 +40,6 @@ class UserPage extends React.Component {
     }
 
     toggleUserAction(name) {
-        console.log(this.props.state);
         this.setState({activeAction: name});
     }
 

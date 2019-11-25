@@ -72,15 +72,6 @@ class Home extends React.Component {
         //this.uploadMoviesList();
     }
 
-    componentWillReceiveProps(nextProps, prevProps) {
-        console.log(`next props `, nextProps);
-        console.log(`this props `, this.props)
-        console.log(`prev props `, prevProps);
-        /*if (!prevProps.location && nextProps.location.pathname !== this.props.location.pathname) {
-            this.uploadMoviesList(nextProps.match.params);
-        }*/
-    }
-
     uploadMoviesList(url) {
         if (this.props.moviesList && this.props.moviesList.length) {
             this.props.onClearMoviesList();
