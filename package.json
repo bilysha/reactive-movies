@@ -1,6 +1,6 @@
 {
   "name": "reactive-movies",
-  "homepage": "http://bilysha.github.io/reactive-movies",
+  "homepage": "http://bilysha.github.io/reactive-movies/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
