@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/reactive-movies/static/media/fontawesome-webfont.af7ae505.woff2"
   },
   {
-    "revision": "48cfad5c4ad8e2a2cf00",
+    "revision": "75a4ade4c15cf3c8d921",
     "url": "/reactive-movies/static/css/main.d77e8c41.chunk.css"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "/reactive-movies/static/media/no_backdrop_image_avaliable.6d654fba.jpg"
   },
   {
-    "revision": "48cfad5c4ad8e2a2cf00",
-    "url": "/reactive-movies/static/js/main.48cfad5c.chunk.js"
+    "revision": "75a4ade4c15cf3c8d921",
+    "url": "/reactive-movies/static/js/main.75a4ade4.chunk.js"
   },
   {
     "revision": "fee66e712a8a08eef5805a46892932ad",
@@ -48,7 +48,7 @@ self.__precacheManifest = [
     "url": "/reactive-movies/static/media/fontawesome-webfont.acf3dcb7.svg"
   },
   {
-    "revision": "c2057d786e7c3ec5fe9d322b5a73f283",
+    "revision": "232b95a6da224202d81ed8d6982fb5d8",
     "url": "/reactive-movies/index.html"
   }
 ];
